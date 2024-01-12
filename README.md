@@ -13,13 +13,17 @@ We Should Hang Out is online platform designed exclusively for college students 
 ### Key Features
 
 ### Technologies
-+ HTML
-+ CSS
-+ JavaScript
-+ Service
-+ DB/Login
-+ WebSocket
-+ React
+I am going to use the required technology
++ HTML - I will use HTML to structure my application. There will be a login In Page, Create Event, See Events Page,
++ CSS - Design a neat structure that appeals users. 
++ JavaScript - Login, creating events, and seeing other events created
++ Service - Backend service with endpoints for 
+    + login
+    + seeing events
+    + creating events 
++ DB/Login - Store users and events in database. Credentials securely stored in database.
++ WebSocket - If a user creates an event all users will be notified. 
++ React - Application ported to use the React web framework
 
 ### HTML Deliverable
 ### CSS Deliverable
