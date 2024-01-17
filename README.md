@@ -10,8 +10,14 @@ We Should Hang Out will be an exclusive online platform crafted for college stud
 ### Design
 ![Homepage Design of We Should Hangout]("startup\sketches.png")
 
+The Photos above show a potential User Interface for the Login Page, the Hang Out Hub, and the create event page
+
 
 ### Key Features
++ Users will be able to create an account and log in
++ Users will be able to host an event
++ All users will be able to see all the events
++ If the date and time of an event pass then the event will automatically be removed from the database
 
 ### Technologies
 I am going to use the required technology
