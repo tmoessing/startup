@@ -8,7 +8,7 @@
 We Should Hang Out will be an exclusive online platform crafted for college students, recognizing that even in a social environment, making friends can be challenging, especially for those who are shy or spend a lot of time focused on their studies. This platform will be designed to bridge that gap, connecting like-minded peers with shared interests. Whether you enjoy exploring new places, playing boardgames, staying active, or engaging in meaningful conversations.
 
 ### Design
-![Homepage Design of We Should Hangout]("C:\Users\hcila\OneDrive - Brigham Young University\Documents\School\2024 BYU Fall\CS 260\Start Up Sketches.png")
+![Homepage Design of We Should Hangout]("startup\sketches.png")
 
 
 ### Key Features
