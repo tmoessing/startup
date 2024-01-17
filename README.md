@@ -5,9 +5,10 @@
 
 
 ### Elevator Pitch
-We Should Hang Out is online platform designed exclusively for college students seeking vibrant social connections. Discover like-minded peers who share your interests, whether it's exploring new places, enjoying great food, staying active, or engaging in meaningful conversations. With user-friendly features, our platform makes planning meetups and group activities a breeze, fostering real-world friendships and unforgettable memories. Join us today and redefine your college experience by connecting with fellow students who are ready to make the most of every moment.
+We Should Hang Out will be an exclusive online platform crafted for college students, recognizing that even in a social environment, making friends can be challenging, especially for those who are shy or spend a lot of time focused on their studies. This platform will be designed to bridge that gap, connecting like-minded peers with shared interests. Whether you enjoy exploring new places, playing boardgames, staying active, or engaging in meaningful conversations.
 
 ### Design
+![Homepage Design of We Should Hangout]("C:\Users\hcila\OneDrive - Brigham Young University\Documents\School\2024 BYU Fall\CS 260\Start Up Sketches.png")
 
 
 ### Key Features
