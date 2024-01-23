@@ -83,7 +83,7 @@ Click on the Instance box and select your server instance.
 
 Press Associate.
 
-** Manage your DNS records **
+**Manage your DNS records**
 Now that you own a domain name you can use it to create DNS records that will map domain names to IP addresses (A records) or other domain names (CNAME records). For the purposes of this class, you want your root domain name, and any subdomain of your root domain, to map to the IP address of the web server you created previously.
 
 You will need the public IP address for your server. You can get the public IP address by opening the AWS browser console and viewing the details of your server on the EC2 service page.
@@ -105,7 +105,7 @@ In the Value box enter the public IP address of your server.
 Press Create records
 A new A type record should appear in your list of records that represents the wildcard subdomain name and your server's public IP address.
 
-** Caddy **
+**Caddy**
 Documentation - https://caddyserver.com/docs/caddyfile
 Web Service that listens for incoming HTTP requests. Caddy then either serves up the requested static files or routes the request to another web service. This ability to route requests is called a gateway, or reverse proxy, and allows you to expose multiple web services (i.e. your project services) as a single external web service (i.e. Caddy). Caddy handles web certificates.
 
