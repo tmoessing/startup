@@ -154,3 +154,37 @@ You can also chain the input and output of commands using special characters
 '|' - Take the output from the command on the left and pipe, or pass, it to the command on the right
 '>' - Redirect output to a file. Overwrites the file if it exists
 '>>' - Redirect output to a file. Appends if the file exists
+
+**HTML**
+
+Helpful Links
+'<> </>' a starter and a closer is an element
+'<!-- Comment -->'
+
+'<!DOCTYPE html>' States the version HTML5
+'<html>' Boundary around the whole thing
+lang = “en” attribute
+'<head>' Items that won’t render
+'<title>' Puts the title on the Tab Name
+'<body>' Body of the Document
+'<header>' Header Content
+'<main>' main content on the page
+'<footer>' Footer content
+'<section>' a section of main
+'<div>' a block division of content
+'<span>' An inline span of content
+
+
+'<p>' Paragraph 
+'<img>' Image Tag
+alt accessibility tells what image is
+src url for an image 
+height, width
+'<a>' Link to Click
+href hyperlink reference
+'<h(1-9)>' Header 
+'<table>' table
+'<ol>|<ul>' ordered or unordered lists
+
++ https://codepen.io/leesjensen/pen/dyVdNej
++ https://codepen.io/leesjensen/pen/GRGBqbw
