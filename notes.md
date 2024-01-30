@@ -1,28 +1,38 @@
-#Notes#
-My Web Server http://44.222.228.34/
+**Notes**
 
-**Git**
-'''
+
+# Git
+
+```
 git commit -am "Inital Commit"
-'''
+```
 
-**Website**
+# Website
+
 HTML - Structure
+
 CSS - Style
+
 JavaScript - Interaction
+
 Service - Web service endpoints
+
 Database/Login - Persisted app auth data
+
 WebSocket - Data pushed from server, chat
+
 React - Web framework
 
-**History**
+# History
+
 Tim Berners Lee - HMTL (Hypertext Markup Transcript Language)
 
-**Technology Stack**
+# Technology Stack
+
 Host Name - is a website name like byu.edu
 DNS (Domain Name System) - Turns Hostname into IP Address
 
-**Creating a Server**
+# Creating a Server
 EC2 (Elastic Compute Cloud) - AWS rent a server
 Create an instance - make a server
 Amazon Machine Image (AMI) - An AMI is a template that contains the software configuration (operating system, application server, and applications) required to launch your instance.
@@ -41,18 +51,18 @@ Alow SSH, HTTP, and HTTPS traffic from anywhere.
 
 Click create instance. 
 
-**SSH into your server**
-'ssh -i [key pair file] ubuntu@[ip address]'
+# SSH into your server
+`ssh -i [key pair file] ubuntu@[ip address]`
 
 You may get a warning that your key pair file permissions are too open. If so then you can restrict the permissions on your file so that they are not accessible to all users by running the chmod console command:
 
-'chmod  600 [key pair file]'
+`chmod  600 [key pair file]`
 
 As it connects to the server it might warn you that it hasn't seen this server before. You can confidently say yes since you are sure of the identity of this server.
 
-Exit by 'exit'
+Exit by `exit`
 
-**Keeping Same public IP address**
+# Keeping Same public IP address**
 You can stop your server at any time. Don't confuse this with terminating your server which completely destroys it. Stopping your server just powers down the device. This is nice because you don't have to pay for it while it is stopped. However, every time you stop and start your server, it will be assigned a new public IP address. It is important to keep the same public IP address so that you, and others, can always browse to the same place. More importantly, when you create your domain name, you can assign it to an address that never changes.
 
 You have two choices in order to keep the same public IP address:
@@ -83,7 +93,7 @@ Click on the Instance box and select your server instance.
 
 Press Associate.
 
-**Manage your DNS records**
+# Manage your DNS records
 Now that you own a domain name you can use it to create DNS records that will map domain names to IP addresses (A records) or other domain names (CNAME records). For the purposes of this class, you want your root domain name, and any subdomain of your root domain, to map to the IP address of the web server you created previously.
 
 You will need the public IP address for your server. You can get the public IP address by opening the AWS browser console and viewing the details of your server on the EC2 service page.
@@ -105,7 +115,7 @@ In the Value box enter the public IP address of your server.
 Press Create records
 A new A type record should appear in your list of records that represents the wildcard subdomain name and your server's public IP address.
 
-**Caddy**
+# Caddy
 Documentation - https://caddyserver.com/docs/caddyfile
 Web Service that listens for incoming HTTP requests. Caddy then either serves up the requested static files or routes the request to another web service. This ability to route requests is called a gateway, or reverse proxy, and allows you to expose multiple web services (i.e. your project services) as a single external web service (i.e. Caddy). Caddy handles web certificates.
 
@@ -117,74 +127,117 @@ For our work we are using the web service Caddy to act as a gateway to our diffe
 + Modify the Caddy rule for handling requests to port 80 (HTTP), to instead handle request for your domain name. By not specifying a port the rule will serve up files using port 443 (HTTPS), and any request to port 80 will automatically redirect the browser to port 443. Replace :80 with your domain name (e.g. myfunkychickens.click). Make sure that you delete the colon.
 
 Save the file and exit
-'sudo service caddy restart'
+`sudo service caddy restart`
 
 Note - Make Sure the spacing is right in the Caddy file there should be a space after the domain name and before the bracket
 
-**Console**
+# Console
 
 echo - Output the parameters of the command
+
 cd - Change directory
+
 mkdir - Make directory
+
 rmdir - Remove directory
+
 rm - Remove file(s)
+
 mv - Move file(s)
+
 cp - Copy files
+
 ls - List files
+
 curl - Command line client URL browser
+
 grep - Regular expression search
+
 find - Find files
+
 top - View running processes with CPU and memory usage
+
 df - View disk statistics
+
 cat - Output the contents of a file
+
 less - Interactively output the contents of a file
+
 wc - Count the words in a file
+
 ps - View the currently running processes
+
 kill - Kill a currently running process
+
 sudo - Execute a command as a super user (admin)
+
 ssh - Create a secure shell on a remote computer
+
 scp - Securely copy files to a remote computer
+
 history - Show the history of commands
+
 ping - Check if a website is up
+
 tracert - Trace the connections to a website
+
 dig - Show the DNS information for a domain
+
 man - Look up a command in the manual
+
 You can also chain the input and output of commands using special characters
 
-'|' - Take the output from the command on the left and pipe, or pass, it to the command on the right
-'>' - Redirect output to a file. Overwrites the file if it exists
-'>>' - Redirect output to a file. Appends if the file exists
+`|` - Take the output from the command on the left and pipe, or pass, it to the command on the right
 
-**HTML**
+`>` - Redirect output to a file. Overwrites the file if it exists
 
-Helpful Links
-'<> </>' a starter and a closer is an element
-'<!-- Comment -->'
+`>>` - Redirect output to a file. Appends if the file exists
 
-'<!DOCTYPE html>' States the version HTML5
-'<html>' Boundary around the whole thing
+# HTML
+
+`<> </>` a starter and a closer is an element
+
+`<!-- Comment -->`
+
+`<!DOCTYPE html>` States the version HTML5
+
+`<html>` Boundary around the whole thing
+
 lang = “en” attribute
-'<head>' Items that won’t render
-'<title>' Puts the title on the Tab Name
-'<body>' Body of the Document
-'<header>' Header Content
-'<main>' main content on the page
-'<footer>' Footer content
-'<section>' a section of main
-'<div>' a block division of content
-'<span>' An inline span of content
 
+`<head>` Items that won’t render
 
-'<p>' Paragraph 
-'<img>' Image Tag
+`<title>` Puts the title on the Tab Name
+
+`<body>` Body of the Document
+
+`<header>`' Header Content
+
+`<main>` main content on the page
+
+`<footer>` Footer content
+
+`<section>` a section of main
+
+`<div>` a block division of content
+
+`<span>` An inline span of content
+
+`<p>` Paragraph 
+
+`<img>` Image Tag
+
 alt accessibility tells what image is
 src url for an image 
 height, width
-'<a>' Link to Click
+`<a>` Link to Click
+
 href hyperlink reference
-'<h(1-9)>' Header 
-'<table>' table
-'<ol>|<ul>' ordered or unordered lists
+`<h(1-9)>` Header 
+
+`<table>` table
+
+`<ol>|<ul>` ordered or unordered lists
 
 + https://codepen.io/leesjensen/pen/dyVdNej
 + https://codepen.io/leesjensen/pen/GRGBqbw
