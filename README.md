@@ -35,12 +35,12 @@ I am going to use the required technology
 ### HTML Deliverable
 For this deliverable I built out the structure of my application using HTML.
 
-- **HTML pages** - Two HTML page that represent the ability to login and vote.
-- **Links** - The login page automatically links to the voter page. The voter page contains links for every voting choice.
-- **Text** - Each of the voting choices is represented by a textual description.
-- **Images** - I couldn't figure out how to include an image and so I didn't do this. 😔
-- **DB/Login** - Input box and submit button for login. The voting choices represent data pulled from the database.
-- **WebSocket** - The count of voting results represent the tally of realtime votes.
+- **HTML pages** - A Variety of HTML pages with capabilites to view all events, one to plan an event, one to register, log in and log out. 
+- **Links** - The navigation bar at the top allows the user to navigate to all the HTML pages.
+- **Text** - Starting off at the welcome page there is text to introuduce the user to the website.
+- **Images** - On each HTML page there is a logo on the top of each page.
+- **DB/Login** - Input box and submit button for login. The plan event will push to the data base. The Hangout Hub will pull from the database.
+- **WebSocket** - In the Hangout Hub, it will pull all the events created from other users. 
 
 ### CSS Deliverable
 ### JavaScript Deliverable
