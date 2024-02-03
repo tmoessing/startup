@@ -241,3 +241,10 @@ href hyperlink reference
 
 + https://codepen.io/leesjensen/pen/dyVdNej
 + https://codepen.io/leesjensen/pen/GRGBqbw
+
+
+
+# Deploy Files
+
+
+./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon
