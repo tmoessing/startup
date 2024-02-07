@@ -1,0 +1,67 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #6B52AE, #1A85FF);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header {
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+header h1 {
+    font-size: 36px;
+}
+
+#description {
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Navigation Bar */
+
+.yellow-nav-bar {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 0;
+}
+
+.yellow-nav-bar li {
+    padding: 10px;
+}
+
+.yellow-nav-bar a {
+    text-decoration: none;
+    color: black;
+}
+
+.yellow-nav-bar a:hover {
+    color: #1A85FF;
+    font-weight: bold;
+}
+
+/* Button */
+
+.box-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+}
