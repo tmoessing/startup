@@ -40,7 +40,7 @@ For this deliverable I built out the structure of my application using HTML.
 - **Text** - Starting off at the welcome page there is text to introuduce the user to the website.
 - **Images** - On each HTML page there is a logo on the top of each page.
 - **DB/Login** - Input box and submit button for login. The plan event will push to the data base. The Hangout Hub will pull from the database.
-- **WebSocket** - In the Hangout Hub, it will pull all the events created from other users. 
+- **WebSocket** - There will be a notification if someone has added an event to the Hang Out Hub. This will happen in live time
 
 ### CSS Deliverable
 ### JavaScript Deliverable
