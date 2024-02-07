@@ -193,7 +193,53 @@ You can also chain the input and output of commands using special characters
 
 `>>` - Redirect output to a file. Appends if the file exists
 
+#VIM 
+
+`:h`	help
+
+`i`	enter insert mode. This will allow you to type and delete text. Use ESC to exit insert mode. No other commands will work while in insert mode.
+
+`u`	undo
+
+`CTRL-r`	redo
+
+`gg`	go to beginning of file
+
+`G`	go to end of file
+
+`/`	search for text that you type after /
+
+`n`	next search match
+
+`N`	previous search match
+
+`v`	visually select text
+
+`y`	yank or copy selected text to clipboard
+
+`p`	paste clipboard
+
+`CTRL-wv`	Split window vertically
+
+`CTRL-ww`	Toggle windows
+
+`CTRL-wq`	Close current window
+
+`:e`	Open a file. Type ahead available. If you open a directory you can navigate it in the window
+
+`:w`	write file (save)
+
+`:q`	quit. Use `:q!` to exit without saving
+
 # HTML
+
+HTML Elements
++ html element represents the top level page structure
++ head element contains metadata about the page and the page title
++ body element represents the content structure
++ main element represents the main content structure, as opposed to things like headers, footers, asides, and navigation content.
+
+Examples
 
 `<> </>` a starter and a closer is an element
 
@@ -239,10 +285,14 @@ href hyperlink reference
 
 `<ol>|<ul>` ordered or unordered lists
 
-+ https://codepen.io/leesjensen/pen/dyVdNej
-+ https://codepen.io/leesjensen/pen/GRGBqbw
++ [Structure Example](https://codepen.io/leesjensen/pen/GRGBqbw)
++ [Input Example](https://codepen.io/leesjensen/pen/dyVdNej)
 
+Attributes
++ id attribute gives unique ID to the element
++ class attribute designates the element as being classified into a named group
 
+A web server will look for an index.html
 
 # Deploy Files
 
