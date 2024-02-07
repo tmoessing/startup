@@ -294,7 +294,35 @@ Attributes
 
 A web server will look for an index.html
 
-# Deploy Files
+# HTML Media
 
+**Image**
+
+`<img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" />`
+
+alt Element decribes image
+
+**Audio**
+
+`<audio controls src="testAudio.mp3"></audio>`
+
+controls attribute allows user to control audio
+autoplay attribute starts audio as soon as audio loads
+loop attribute keeps play over and over
+
+**Audio**
+
+`<video controls width="300" crossorigin="anonymous">
+  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+</video>`
+
+controls attribute allows user to control video
+autoplay attribute starts audio as soon as video loads
+
+**Internal Media**
+SVG is an extremely powerful and widely supported way to render graphics inline in your HTML.
+
+# Deploy Files
+Using Shell Script
 
 ./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon
