@@ -246,5 +246,4 @@ href hyperlink reference
 
 # Deploy Files
 
-
-./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon
+`./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon`
