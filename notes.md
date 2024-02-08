@@ -326,3 +326,270 @@ SVG is an extremely powerful and widely supported way to render graphics inline 
 Using Shell Script
 
 ./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon
+
+# Cascading Style Sheets
+
+Functionally, CSS is primarily concerned with defining **rulesets**, or simply **rules**. A rule is comprised of a **selector** that selects the elements to apply the rule to, and one or more **declarations** that represent the **property** to style with the given **property value**.
+
+```
+p {
+  font-family: sans-serif;
+  font-size: 2em;
+  color: navy;
+  text-shadow: 3px 3px 1px #cccccc;
+}
+```
+
+The selector `p` selects all paragraph elements in the HTML document. The four specified declarations then: 1. change the font to use a sans-serif font, 2. increase the font size to be twice as big as the default font, 3. change the text color to be navy, and 4. create a gray shadow for the text. The result looks like this.
+
+Associate CSS with HTML
+`<link rel="stylesheet" href="styles.css" />`
+
+**Box Model**
++ Content Box
++ Padding
++ Border
++ Margin
+
+# CSS Selectors
+
+**Element Type Selectors**
+
+```
+section h2 {
+  color: #004400;
+}
+```
+
+**Combinators**
+
+If you wanted to change the color of the second level headings (h2), but we only want to do that within the sections for each department. 
+
+
+Any h2 that is a descendant of a section
+
+```
+section h2 {
+  color: #004400;
+}
+```
+
+Any p that is a direct child of a section
+
+```
+section > p
+```
+
+Any p that has a div sibling
+
+```
+	div ~ p
+```
+
+Any p that has an adjacent div sibling
+
+```
+	div + p
+```
+
+**Class Selector**
+
+```
+.class_name
+```
+
+**ID Selector**
+
+```
+#id
+```
+
+**Attribute Selector**
+
+a[href]
+
+**Pseudo Selector**
+section:hover
+
+# CSS Units
+
+px	The number of pixels
+
+pt	The number of points (1/72 of an inch)
+
+in	The number of inches
+
+cm	The number of centimeters
+
+%	A percentage of the parent element
+
+em	A multiplier of the width of the letter m in the parent's font
+
+rem	A multiplier of the width of the letter m in the root's font
+
+ex	A multiplier of the height of the element's font
+
+vw	A percentage of the viewport's width
+
+vh	A percentage of the viewport's height
+
+vmin	A percentage of the viewport's smaller dimension
+
+vmax	A percentage of the viewport's larger dimension
+
+# CSS Fonts
+
+In addition to referencing standard fonts found on the user's computer you can specify a font that you provide with your application. That way your application is guaranteed to always look the same. In order to have the browser load a font you use the @font-face rule and provide the font name and source location.
+
+```
+@font-face {
+  font-family: 'Quicksand';
+  src: url('https://cs260.click/fonts/quicksand.ttf');
+}
+```
+
+If you do not want to host font files on your server, then you can load them from a font provider. ([Google Fonts](https://fonts.google.com/))
+
+```
+@import url('https://fonts.googleapis.com/css2?family=Rubik Microbe&display=swap');
+```
+
+# CSS Animation
+
+You create CSS animations using the animation properties and defining keyframes for what the element should look like at different times in the animation.
+
+```
+p {
+  text-align: center;
+  font-size: 20vh;
+
+  animation-name: demo;
+  animation-duration: 3s;
+}
+
+@keyframes demo {
+  from {
+    font-size: 0vh;
+  }
+
+  95% {
+    font-size: 21vh;
+  }
+
+  to {
+    font-size: 20vh;
+  }
+}
+```
+
+# CSS Responsive Design
+
+The CSS display property allows you to change how an HTML element is displayed by the browser. The common options for the display property include the following.
+
+none	Don't display this element. The element still exists, but the browser will not render it.
+
+block	Display this element with a width that fills its parent element. A p or div element has block display by default.
+
+inline	Display this element with a width that is only as big as its content. A b or span element has inline display by default.
+
+flex	Display this element's children in a flexible orientation.
+
+grid	Display this element's children in a grid orientation.
+
+[Example](https://codepen.io/leesjensen/pen/RwBOPjv)
+
+**Viewport meta tag**
+`<meta name="viewport" content="width=device-width,initial-scale=1" />`
+
+# Float
+The float css property moves an element to the left or right of its container element and allows inline elements to wrap around it. For example, if we had an aside element followed by a large paragraph of text, we could create the following CSS rule in order to cause the text to wrap around the aside.
+
+```
+aside {
+  float: right;
+  padding: 3em;
+  margin: 0.5em;
+  border: black solid thin;
+}
+```
+
+# Media Queries
+We can use the @media selector to tell us which side of the screen (technically the viewport) is the longest. A media query takes one or more predicates separated by boolean operators. In our case we simply want to know if the screen is oriented in portrait mode (short side on top) or not. If it is then we transform all of our div elements by rotating them 270 degrees.
+
+```
+@media (orientation: portrait) {
+  div {
+    transform: rotate(270deg);
+  }
+}
+```
+
+[Example 1](https://codepen.io/leesjensen/pen/rNKZOva)
+[Example 2](https://codepen.io/leesjensen/pen/NWzLGmJ)
+
+# CSS Grid
+The grid display layout is useful when you want to display a group of child elements in a responsive grid. We start with a container element that has a bunch of child elements.
+
+```
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 300px;
+  grid-gap: 1em;
+}
+```
+
+We turn this into a responsive grid by including a CSS display property with the value of grid on the container element. This tells the browser that all of the children of this element are to be displayed in a grid flow. The grid-template-columns property specifies the layout of the grid columns. We set this to repeatedly define each column to auto-fill the parent element's width with children that are resized to a minimum of 300 pixels and a maximum of one equal fractional unit (1fr) of the parents total width. A fractional unit is dynamically computed by splitting up the parent element's width into equal parts. Next, we fix the height of the rows to be exactly 300 pixels by specifying the gird-auto-rows property. Finally, we finish off the grid configuration by setting the grid-gap property to have a gap of at least 1 em between each grid item.
+
+[Example](https://codepen.io/leesjensen/pen/GRGXoWP)
+
+# CSS Flex
+The flex display layout is useful when you want to partition your application into areas that responsively move around as the window resizes or the orientation changes
+
+```
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100vh;
+}
+
+header {
+  flex: 0 80px;
+  background: hsl(223, 57%, 38%);
+}
+
+footer {
+  flex: 0 30px;
+  background: hsl(180, 10%, 10%);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+```
+
+To get the division of space for the flexbox children correct we add the following flex properties to each of the children.
+
++ header - flex: 0 80px - Zero means it will not grow and 80px means it has a starting basis height of 80 pixels. This creates a fixed size box.
++ footer - flex: 0 30px - Like the header it will not grow and has a height of 30 pixels.
++ main - flex: 1 - One means it will get one fractional unit of growth, and since it is the only child with a non-zero growth value, it will get all the remaining space. Main also gets some additional properties because we want it to also be a flexbox container for the controls and content area. So we set its display to be flex and specify the flex-direction to be row so that the children are oriented side by side.
+
+[Example](https://codepen.io/leesjensen/pen/MWOVYpZ)
+
+# CSS Framework
+Allows a way for people to just copy and past code. Bootstrap is the most popular.
+
+```
+<link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+```
+
++ CDN (Content Delivery Network) is a system of distributed servers that work together to deliver web content, such as images, videos, stylesheets, and scripts, to users based on their geographic location.
+
