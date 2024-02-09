@@ -1,11 +1,17 @@
 * {
     font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+html {
+    height: 100vh;
 }
 
 body {
     background: linear-gradient(to bottom, #6B52AE, #1A85FF);
     background-size: cover;
     background-attachment: fixed;
+    height: 100vh;
 }
 
 header {
@@ -33,7 +39,8 @@ header h1 {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     background-color: yellow;
     border: 2px solid black;
     border-radius: 5px;
@@ -64,4 +71,9 @@ header h1 {
     border-radius: 5px;
     text-decoration: none;
     color: black;
+}
+
+.box-button a:hover {
+    color: #1A85FF;
+    font-weight: bold;
 }
