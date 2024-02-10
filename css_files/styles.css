@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap');
+
 * {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -24,7 +26,8 @@ header {
 }
 
 header h1 {
-    font-size: 36px;
+    font-family: 'Sixtyfour', sans-serif;
+    font-size: 5vh;
 }
 
 footer {
@@ -32,6 +35,11 @@ footer {
     flex: 0 30px;
     background: hsl(180, 10%, 10%);
     justify-content: center;
+}
+
+.footer-links {
+    font-weight: bold;
+    text-decoration: none; 
 }
 
 main {
@@ -50,10 +58,16 @@ main {
     text-align: center;
 }
 
+/* Logo */
+#logo {
+    float:left
+}
+
 /* Navigation Bar */
 
 .yellow-nav-bar {
     list-style: none;
+    font-weight: bold;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -71,12 +85,22 @@ main {
 .yellow-nav-bar a {
     text-decoration: none;
     color: black;
+    padding-left: 10vh;
+    padding-right: 10vh;
 }
 
 .yellow-nav-bar a:hover {
     color: #1A85FF;
     font-weight: bold;
 }
+
+/* @media only screen and (max-width:501px) {
+    .yellow-nav-bar a {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+} */
 
 /* Button */
 
