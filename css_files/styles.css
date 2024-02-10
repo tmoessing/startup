@@ -10,8 +10,8 @@ html {
 }
 
 body {
-    background: linear-gradient(to bottom, #6B52AE, #1A85FF);
-    background-size: cover;
+    /* background: linear-gradient(to bottom, #6B52AE, #1A85FF);
+    background-size: cover; */
     background-attachment: fixed;
     margin: 0;
     display: flex;
@@ -20,12 +20,15 @@ body {
 }
 
 header {
-    color: white;
+    background-color: black;
     text-align: center;
     padding: 1em;
 }
 
 header h1 {
+    color: #FF32AF;
+    /* color: rgba(255,50,175, 0.8); */
+    color:white;
     font-family: 'Sixtyfour', sans-serif;
     font-size: 5vh;
 }
@@ -43,6 +46,8 @@ footer {
 }
 
 main {
+    background: linear-gradient(to bottom, #6B52AE, #1A85FF);
+    background-size: cover;
     flex: 1;
     display: flex;
     flex-direction: row;
@@ -72,7 +77,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: yellow;
+    background-color: rgba(233, 162, 10, 0.808);;
+    /* background-color: rgba(255,50,175, 0.4); */
     border: 2px solid black;
     border-radius: 5px;
     margin: 0;
