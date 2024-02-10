@@ -593,3 +593,33 @@ Allows a way for people to just copy and past code. Bootstrap is the most popula
 
 + CDN (Content Delivery Network) is a system of distributed servers that work together to deliver web content, such as images, videos, stylesheets, and scripts, to users based on their geographic location.
 
+## JavaScript
+
+Known as ECMAScript
+
+Adding JavaScript to HTML
+
+**index.js**
+
+```
+function sayHello() {
+  console.log('hello');
+}
+```
+
+**index.html**
+
+```
+<head>
+  <script src="javascript.js"></script>
+</head>
+<body>
+  <button onclick="sayHello()">Say Hello</button>
+  <button onclick="sayGoodbye()">Say Goodbye</button>
+  <script>
+    function sayGoodbye() {
+      alert('Goodbye');
+    }
+  </script>
+</body>
+```
