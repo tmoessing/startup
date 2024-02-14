@@ -19,74 +19,35 @@ body {
     height: 100vh;
 }
 
+/* Header */
+
 header {
     text-align: center;
     padding: 1em;
 }
 
+/* Header Title */
 header h1 {
     color: rgba(255,50,175, 1);
     font-family: 'Sixtyfour', sans-serif;
-    font-size: 8vh;
+    font-size: 4vw;
     animation: pulse 1s infinite;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.01);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-footer {
-    color: white;
-    flex: 0 30px;
-    background: hsl(180, 10%, 10%);
-    justify-content: center;
-}
-
-.footer-links {
-    font-weight: bold;
-    text-decoration: none; 
-}
-
-main {
-    /* background: linear-gradient(to bottom, #6B52AE, #1A85FF); */
-    background-size: cover;
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-#homepage {
-    border: 2px solid black;
-    padding: 2vh;
-    border-radius: 20px;
-    margin-top: 5vh auto;
-    margin-bottom: auto;
-    max-width: 800px;
-    text-align: center;
-}
-
-.picture-box {
-    max-width: 100%;
-    height: auto;
-    margin-top: 1vh;
-
-}
-
-/* Logo */
+/* Header Logo */
 #logo {
+    text-align: center; /* Center the content within the #logo div */
     float: left;
+    margin-top: 20px;
 }
+  
+#logo img {
+    width: 100px; 
+    height: 100px;
+    margin: 0 auto; 
+  }
 
-/* Navigation Bar */
+/* Header Navigation Bar */
 
 .yellow-nav-bar {
     list-style: none;
@@ -116,30 +77,33 @@ main {
     color: #1A85FF;
     font-weight: bold;
 }
+/* Footer */
 
-/* @media only screen and (max-width:501px) {
-    .yellow-nav-bar a {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    
-} */
+footer {
+    background: hsl(180, 10%, 10%);
+    color: white;
 
-/* Button */
-
-.box-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: yellow;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-decoration: none;
-    color: black;
+    flex: 0 30px;
+    justify-content: center;
 }
 
-.box-button a:hover {
-    color: #1A85FF;
+.footer-links {
     font-weight: bold;
+}
+
+/* Main */
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+}
+
+
+/* Links */
+a {
+    text-decoration: none;
 }
 
 
@@ -157,4 +121,17 @@ main {
     main {
       flex: 1 100vh;
     }
-  }
+}
+
+/* Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
