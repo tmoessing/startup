@@ -50,7 +50,6 @@ header h1 {
 /* Header Navigation Bar */
 
 .yellow-nav-bar {
-    list-style: none;
     font-weight: bold;
     padding: 0;
     display: flex;
@@ -58,12 +57,12 @@ header h1 {
     align-items: center;
     background-color: rgba(255, 255, 10);
     border: 2px solid black;
-    border-radius: 5px;
-    margin: 0;
+    border-radius: 10px;
+    margin-left: 0;
 }
 
 .yellow-nav-bar li {
-    padding: 10px;
+    padding: 10vw;
 }
 
 .yellow-nav-bar a {
@@ -77,6 +76,7 @@ header h1 {
     color: #1A85FF;
     font-weight: bold;
 }
+
 /* Footer */
 
 footer {
@@ -104,6 +104,7 @@ main {
 /* Links */
 a {
     text-decoration: none;
+    list-style: none;
 }
 
 

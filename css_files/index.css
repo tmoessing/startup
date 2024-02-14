@@ -9,6 +9,15 @@
     text-align: center;
 }
 
+/* Text */
+
+.description {
+    font-weight: bold;
+}
+
+
+/* Picture */
+
 .picture {
     max-width: 100%;
     height: auto;
@@ -26,6 +35,11 @@
     text-decoration: none;
     color: black;
 }
+
+.box-button a {
+    color: black;
+}
+
 
 .box-button a:hover {
     color: #1A85FF;
