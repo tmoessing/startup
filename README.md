@@ -43,6 +43,17 @@ For this deliverable I built out the structure of my application using HTML.
 - **WebSocket** - There will be a notification if someone has added an event to the Hang Out Hub. This will happen in live time
 
 ### CSS Deliverable
+
+[x] - done - Prerequisite: Simon CSS deployed to your production environment
+[x] - done - Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+[x] - done - Prerequisite: Notes in your startup Git repository README.md file
+[x] - done - 30% Header, footer, and main content body. Used flex to layout sections.
+[x] - done - 20% Navigation elements. Links highlight on hover.
+[x] - done - 10% Responsive to window resizing. Looks great on iPad, desktop, and iPhone.
+[x] - done - 20% Application elements. Log In Page used bootstrap
+[x] - done - 10% Application text content. Text is displayed using imported font from Google and has a pulse animation
+[x] - done - 10% Application images. Image to Home Page
+
 ### JavaScript Deliverable
 ### Serivce Deiliverable
 ### DB/Login Deliverable
