@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="Icon" href="..\media_files\we_should_hangout_title-icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css_files/main.css">
+    <link rel="stylesheet" href="../css_files/register.css">
 </head>
 <body>
     <header>
@@ -26,35 +28,30 @@
     </header>
 
     <main> 
-        <div>
+        <div class="register">
             <h2>Register</h2>
             <form method="get" action="plan_event.html">
-                <ul>
-                    <li>
-                        <label for="fname">First Name:</label>
-                        <input type="text" id="fname" name="fname" placeholder="John" required pattern="[A-Za-z]*">
-
-                        <label for="lname">Last Name:</label>
-                        <input type="text" id="lname" name="lname" placeholder="Smith" required pattern="[A-Za-z]*">
-                    </li>
-                    <li>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="johnsmith@gmail.com" required>
-                    </li>
-                    <li>
-                        <label for="dob">Date of Birth:</label>
-                        <input type="date" id="dob" name="dob" required>
-                    </li>
-                    <li>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Your password" required>
-                    </li>
-                    <li>
-                        <label for="confirmPassword">Confirm Password:</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
-                    </li>
-                </ul>
-                <button type="submit">Register</button>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="fname" placeholder="John" required>
+                        <label for="floatingInput">First Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="lname" placeholder="Smith" required>
+                        <label for="floatingInput">Last Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
+                        <label for="floatingInput">Email Address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" name="confirmPassword" placeholder="Password" required>
+                        <label for="floatingPassword">Confirm Password</label>
+                    </div>
+                <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
             </form>
         </div> 
     </main>

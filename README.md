@@ -50,7 +50,7 @@ For this deliverable I built out the structure of my application using HTML.
 - 30% Header, footer, and main content body. Used flex to layout sections.
 - 20% Navigation elements. Links highlight on hover.
 - 10% Responsive to window resizing. Looks great on iPad, desktop, and iPhone.
-- 20% Application elements. Log In Page used bootstrap
+- 20% Application elements. Log In and Register Page used bootstrap
 - 10% Application text content. Text is displayed using imported font from Google and has a pulse animation
 - 10% Application images. Image to Home Page
 
