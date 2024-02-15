@@ -1,4 +1,17 @@
-/* Table */
+/* Main Body */
+
+main {
+    padding-top: 5vh;
+    padding-bottom: 10vh;
+    flex-direction: column;
+    position: relative;
+}
+
+h2 {
+    font-size: 5vh;
+}
+
+/* Form */
 .plan_event_box {
     padding: 5vh;
     background-color: yellow;
@@ -8,7 +21,8 @@
 
 form {
     display: inline-block;
-    text-align: middle;
+    text-align: center;
+    align-items: center;
     width: 100%;
     margin: 0 auto;
   }
@@ -17,7 +31,13 @@ ul{
     list-style: none;
 }
 
-main {
-    padding-top: 10vh;
-    padding-bottom: 30vh;
+.notification {
+    background-color: yellow;
+    padding: 1em;
+    border-radius: 60px;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 5vh;
 }

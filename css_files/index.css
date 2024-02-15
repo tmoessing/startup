@@ -24,24 +24,3 @@
     margin-top: 1vh;
 }
 
-/* Buttons */
-
-.box-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: yellow;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-decoration: none;
-    color: black;
-}
-
-.box-button a {
-    color: black;
-}
-
-
-.box-button a:hover {
-    color: #1A85FF;
-    font-weight: bold;
-}
