@@ -27,8 +27,8 @@ form {
     margin: 0 auto;
   }
 
-ul{
-    list-style: none;
+.form-floating {
+    margin-bottom: 5px;
 }
 
 .notification {

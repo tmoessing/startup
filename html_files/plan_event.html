@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan Event</title>
     <link rel="Icon" href="..\media_files\we_should_hangout_title-icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css_files/main.css">
     <link rel="stylesheet" href="../css_files/plan_event.css">
 </head>
@@ -26,31 +27,27 @@
     </header>
 
     <main>
-        <section class="plan_event_box">
-            <div>
+        <section>
+            <div class="plan_event_box">
                 <h2>Plan Event</h2>
-                <form method="get" action="hangout_hub.html">
-                    <ul>
-                        <li>
-                            <label for="activity">Activity: </label>
-                            <input type="text" id="activity" name="activity" placeholder="Basketball" required pattern="[A-Za-z]*">
-                        </li>
-                        <li>
-                            <label for="date">Date:</label>
-                            <input type="date" id="date" name="date" placeholder="" required pattern="[A-Za-z]*">
-                        </li>
-                        <li>
-                            <label for="time">Time:</label>
-                            <input type="time" id="time" name="time">
-                        </li>
-                        <li>
-                            <label for="location">Location:</label>
-                            <input type="text" id="location" name="location" placeholder="RB" required pattern="[A-Za-z]*">
-                        </li>
-                    </ul>
-
-                        <button type="submit">Create</button>
-
+                <form class="form-floating" method="get" action="hangout_hub.html">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="activity" placeholder="Basketball" required>
+                        <label for="floatingInput">Activity</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="date" name="date" required>
+                        <label for="date">Date</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="time" class="form-control" id="time" name="time" required>
+                        <label for="time">Time</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="location" placeholder="Basketball" required>
+                        <label for="floatingInput">Location</label>
+                    </div>
+                    <button class="btn btn-primary w-100 py-2" type="submit">Create</button>
                 </form>
             </div>
         </section>
