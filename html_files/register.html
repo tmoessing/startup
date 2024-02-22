@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css_files/main.css">
     <link rel="stylesheet" href="../css_files/register.css">
+
+    <script defer src="../javascript_files/register.js"></script>
 </head>
 <body>
     <header>
@@ -32,26 +34,26 @@
             <h2>Register</h2>
             <form method="get" action="plan_event.html">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="fname" placeholder="John" required>
-                        <label for="floatingInput">First Name</label>
+                        <input type="text" class="form-control" id="fname" name="fname" placeholder="John" required>
+                        <label for="fname">First Name</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="lname" placeholder="Smith" required>
-                        <label for="floatingInput">Last Name</label>
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="Smith" required>
+                        <label for="lname">Last Name</label>
                     </div>
                     <div class="form-floating">
                         <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
-                        <label for="floatingInput">Email Address</label>
+                        <label for="email">Email Address</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
-                        <label for="floatingPassword">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        <label for="password">Password</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" name="confirmPassword" placeholder="Password" required>
-                        <label for="floatingPassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Password" required>
+                        <label for="confirmPassword">Confirm Password</label>
                     </div>
-                <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
+                <button class="btn btn-primary w-100 py-2" onclick="register()">Register</button>
             </form>
         </div> 
     </main>
