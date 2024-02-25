@@ -11,7 +11,8 @@ function register() {
 
     if (validatePassword(password, confirmPassword)){
         localStorage.setItem("UserDataObject", JSON.stringify(UserDataObject));
-        window.location.href = "plan_event.html";   let retrievedUserDataObject = JSON.parse(localStorage.getItem("UserDataObject"));
+        window.location.href = "plan_event.html";   
+        // let retrievedUserDataObject = JSON.parse(localStorage.getItem("UserDataObject"));
     } else {
         // Clear all Boxes
         document.getElementById("fname").value = "";

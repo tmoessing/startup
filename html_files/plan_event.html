@@ -31,10 +31,10 @@
         <section>
             <div class="plan_event_box">
                 <h2>Plan Event</h2>
-                <form class="form-floating" method="get" action="hangout_hub.html">
+                <div class="form-floating">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="activity" placeholder="Basketball" required>
-                        <label for="floatingInput">Activity</label>
+                        <input type="text" class="form-control" id="activity" name="activity" placeholder="Basketball" required>
+                        <label for="activity">Activity</label>
                     </div>
                     <!-- <div class="form-floating">
                         <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
@@ -49,11 +49,11 @@
                         <label for="time">Time</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="location" placeholder="Basketball" required>
-                        <label for="floatingInput">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" placeholder="Basketball" required>
+                        <label for="location">Location</label>
                     </div>
-                    <button class="btn btn-primary w-100 py-2" type="submit">Create</button>
-                </form>
+                    <button class="btn btn-primary w-100 py-2" onclick="newEvent()" type="submit">Create</button>
+                </div>
             </div>
         </section>
         <aside class="notification">
