@@ -32,7 +32,8 @@
     <main> 
         <div class="register">
             <h2>Register</h2>
-            <form method="get" action="plan_event.html" onsubmit="register()">
+            <div> 
+                <!-- method="get" action="plan_event.html" -->
                     <div class="form-floating">
                         <input type="text" class="form-control" id="fname" name="fname" placeholder="John" required>
                         <label for="fname">First Name</label>
@@ -42,7 +43,7 @@
                         <label for="lname">Last Name</label>
                     </div>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
                         <label for="email">Email Address</label>
                     </div>
                     <div class="form-floating">
@@ -53,8 +54,8 @@
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Password" required>
                         <label for="confirmPassword">Confirm Password</label>
                     </div>
-                <button class="btn btn-primary w-100 py-2" ">Register</button>
-            </form>
+                <button class="btn btn-primary w-100 py-2" onclick="register()">Register</button>
+            </div>
         </div> 
     </main>
 

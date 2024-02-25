@@ -9,20 +9,31 @@ function register() {
 
     let UserDataObject = createUserDataObject(fname, lname, email, password);
 
-    // validatePassword(password, confirmPassword)
-    console.log(JSON.stringify(UserDataObject));
+    if (validatePassword(password, confirmPassword)){
+        localStorage.setItem("UserDataObject", JSON.stringify(UserDataObject));
+        window.location.href = "plan_event.html";   let retrievedUserDataObject = JSON.parse(localStorage.getItem("UserDataObject"));
+    } else {
+        // Clear all Boxes
+        document.getElementById("fname").value = "";
+        document.getElementById("lname").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("confirmPassword").value = "";
 
-    localStorage.setItem("UserDataObject", JSON.stringify(UserDataObject));
+        alert("Password's do not Match");
+    }
 
-    let retrievedUserDataObject = JSON.parse(localStorage.getItem("UserDataObject"));
-    console.log(retrievedUserDataObject);
+    
+    
+ 
 }
 
 function validatePassword(password, confirmPassword) {
     if (password === confirmPassword){
-        return;
+        return true;
     } else {
-        alert("ERROR!");
+
+        return false
         
     }
     
