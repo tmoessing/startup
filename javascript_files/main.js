@@ -11,7 +11,7 @@ function onPageLoad() {
         console.log("Database already created")
     } else {
         let userData = {total_users: 0};
-        let eventData = {total_events: 0};
+        let eventData = [];
         // localStorage.setItem("userData", JSON.stringify(userData));
         localStorage.setItem("eventData", JSON.stringify(eventData));
     }
