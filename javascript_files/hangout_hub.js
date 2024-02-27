@@ -92,6 +92,14 @@ function loadTable(data = recieveData()) {
 
 function recieveData() {
     let dataobject = JSON.parse(localStorage.getItem("eventData"))
+    if (dataobject.length === 0){
+
+    }
+    else {
+      return dataobject;
+    }
+   
+    
     }
 
 
