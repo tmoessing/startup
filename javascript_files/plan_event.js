@@ -42,36 +42,57 @@ function newEvent() {
     let event_time = document.getElementById("time").value;
     let event_location = document.getElementById("location").value;
 
+    // let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
+
+    // let retrievdEventObject = JSON.parse(storedValue);
+    // let newEventObject = retrievdEventObject;
+
+    // newUserDataObject["total_events"] += 1;
+    // let event_ID = newUserDataObject["total_events"];
+
+    // Object.assign(newEventObject, {[event_ID]: EventObject});
+
+    // localStorage.setItem("eventData", JSON.stringify(newEventObject));
+
+    // storeEvent();
+
+    // window.location.href = "hangout_hub.html";
+
+    
+
     let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
+    
+    let retrievdEventList = JSON.parse(localStorage.getItem("eventData"));
 
-    let retrievdEventObject = JSON.parse(storedValue);
-    let newEventObject = retrievdEventObject;
+    retrievdEventList.push(EventObject);
 
-    newUserDataObject["total_events"] += 1;
-    let event_ID = newUserDataObject["total_events"];
 
-    Object.assign(newEventObject, {[event_ID]: EventObject});
-
-    localStorage.setItem("eventData", JSON.stringify(newEventObject));
-
-    storeEvent();
-
+    localStorage.setItem("eventData", JSON.stringify(retrievdEventList));
+    
     window.location.href = "hangout_hub.html";
+    
 }
 
 function createEventObject(event_activity, event_date, event_time, event_location) {
+    // return EventObject = {
+    //     event_details:{
+    //         event_activity: event_activity,
+    //         event_date: event_date,
+    //         event_time: event_time,
+    //         event_location: event_location},
+    //     event_meta_data:{
+    //         event_author: getEventAuthor(),
+    //         event_creation_data: new Date().toISOString().split('T')[0]
+    //     }
+    // };
+
     return EventObject = {
-        event_details:{
-            event_activity: event_activity,
-            event_date: event_date,
-            event_time: event_time,
-            event_location: event_location},
-        event_meta_data:{
-            event_author: getEventAuthor(),
-            event_creation_data: new Date().toISOString().split('T')[0]
-        }
+            Activity: event_activity,
+            Date: event_date,
+            Time: event_time,
+            Location: event_location}
     };
-}
+
 
 function getEventAuthor() {
     let currentUserObject = JSON.parse(localStorage.getItem("currentUser"));
