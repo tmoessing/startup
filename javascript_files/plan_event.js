@@ -42,6 +42,11 @@ function newEvent() {
     let event_time = document.getElementById("time").value;
     let event_location = document.getElementById("location").value;
 
+    if (!event_activity || !event_date || !event_time || !event_location) {
+        alert("Please fill out all required fields.");
+        return;
+    }
+
     // let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
 
     // let retrievdEventObject = JSON.parse(storedValue);
