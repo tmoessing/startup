@@ -55,6 +55,16 @@ For this deliverable I built out the structure of my application using HTML.
 - 10% Application images. Image to Home Page
 
 ### JavaScript Deliverable
+
+- Prerequisite: Simon JavaScript deployed to your production environment
+- Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+- Prerequisite: Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable
+- At least 10 git commits spread consistently throughout the assignment period
+- Support for future login - A user can register and log in. this data is stored of local storage
+- Support for future database data - A insertion of an event on the Plan Event Page will push to local storage. The hangout hub will pull from local storage
+- support for future WebSocket - Using the SetInterval Function, on the Plan Event Page, shows when a user plans events. Will be replaced with websocket
+- support for your application's interaction logic - Users will be able to see all events created on the hangout hub page
+
 ### Serivce Deiliverable
 ### DB/Login Deliverable
 ### WebSocket Deliverable
