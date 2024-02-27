@@ -24,7 +24,7 @@ function register() {
         return;
     }
 
-    let UserDataObject = createUserDataObject(fname, lname, email, password);
+    // let UserDataObject = createUserDataObject(fname, lname, email, password);
 
     if (!validatePassword(password, confirmPassword)){
         // Clear Password Boxes
@@ -39,14 +39,21 @@ function register() {
     let UserID = newUserID();
 
     // Update Current Users
-    localStorage.setItem("currentUser", JSON.stringify({[UserID]: UserDataObject}));
+    // localStorage.setItem("currentUser", JSON.stringify({[UserID]: UserDataObject}));
+    localStorage.setItem("currentUser", email);
+
     // Appends to User Data
-    let retrievdUserDataObject = JSON.parse(localStorage.getItem("userData"));
-    let newUserDataObject = retrievdUserDataObject;
+    // let retrievdUserDataObject = JSON.parse(localStorage.getItem("userData"));
+    // let newUserDataObject = retrievdUserDataObject;
     
-    Object.assign(newUserDataObject, {[UserID]: UserDataObject});
-    localStorage.setItem("userData", JSON.stringify(newUserDataObject));
+    // Object.assign(newUserDataObject, {[UserID]: UserDataObject});
+    // localStorage.setItem("userData", JSON.stringify(newUserDataObject));
+    // window.location.href = "plan_event.html";
+    
+    localStorage.setItem(email, password);
     window.location.href = "plan_event.html";
+
+
 
 }
 
