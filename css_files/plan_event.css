@@ -31,13 +31,26 @@ form {
     margin-bottom: 5px;
 }
 
-.notification {
+.notification-section {
+    display: none;
     background-color: yellow;
     padding: 1em;
-    border-radius: 60px;
+    border-radius: 50px;
+    text-align: center;
 
     position: absolute;
     top: 0;
     right: 0;
     margin-right: 5vh;
+    
+    border: 5px solid black;
+}
+
+.notification {
+    padding-top: 1vh;
+}
+
+span.user {
+    color: rgba(255,50,175, 1);
+    font-weight: bold;
 }

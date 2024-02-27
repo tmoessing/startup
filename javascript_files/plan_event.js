@@ -1,6 +1,39 @@
+// Simulate Message Notifications
+setInterval(() => {
+    const randomTime = getRandomTime();
+    const notificationContainer  = document.querySelector('.notification-section');
+    // notificationContainer .innerHTML = `<aside class="notification"><p><span class="user">Caden</span> planned Basketball at ${randomTime} </p></aside>`;
+    // chatText.innerHTML;
+
+    const newNotification = document.createElement('aside');
+    newNotification.className = '.notification';
+    newNotification.innerHTML = `<p><span class="user">Caden</span> planned Basketball at ${randomTime}</p>`;
+    notificationContainer.appendChild(newNotification);
+
+    if (notificationContainer.children.length > 4) {
+        notificationContainer.removeChild(notificationContainer.children[0])
+    }
+
+    notificationContainer.style.display = 'block';
+
+  }, 5000);
+
+
+function getRandomTime() {
+    const hours = Math.floor(Math.random() * 24);
+    const minutes = Math.floor(Math.random() * 60);
+
+    // Ensure leading zeros for single-digit hours/minutes
+    const formattedHours = hours < 10 ? '0' + hours : hours;
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+    return `${formattedHours}:${formattedMinutes}`;
+}
+
+
 // Set limits for input boxes
 let currentDateandTime =  new Date().toISOString().split('T')[0]
-console.log(currentDateandTime)
+// console.log(currentDateandTime)
 document.getElementById('date').min = currentDateandTime
 
 function newEvent() {
@@ -35,7 +68,7 @@ function createEventObject(event_activity, event_date, event_time, event_locatio
             event_location: event_location},
         event_meta_data:{
             event_author: getEventAuthor(),
-            event_creation_data: new Date().toISOString().split('T')[0];
+            event_creation_data: new Date().toISOString().split('T')[0]
         }
     };
 }
