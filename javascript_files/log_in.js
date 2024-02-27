@@ -1,8 +1,20 @@
 function logIn () {
-    const email = document.getElementById("floatingInput").value;
-    const password = document.getElementById("Password").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
 
-    const userInfo = {email: email, password: password}
+    let retrievdUserDataObject = JSON.parse(localStorage.getItem("userData"));
 
-    localStorage.setItem("UserName", email);
+    for (let user in retrievdUserDataObject){
+        if (user[userinformation]) {
+            if (user[userinformation][username] == email){
+                if (user[userinformation][username] == email){
+                    userID = user[userinformation][]
+            }
+        }
+
+    }
+
+    
+
+    // window.location.href = "plan_event.html";
 }

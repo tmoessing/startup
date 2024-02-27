@@ -10,7 +10,18 @@ function register() {
     let UserDataObject = createUserDataObject(fname, lname, email, password);
 
     if (validatePassword(password, confirmPassword)){
-        localStorage.setItem("UserDataObject", JSON.stringify(UserDataObject));
+        let retrievdUserDataObject = JSON.parse(localStorage.getItem("userData"));
+        let newUserDataObject = retrievdUserDataObject;
+
+        newUserDataObject["total_users"] += 1;
+        let userID = newUserDataObject["total_users"];
+
+        Object.assign(newUserDataObject, {[userID]: UserDataObject});
+
+        localStorage.setItem("userData", JSON.stringify(newUserDataObject));
+
+        localStorage.setItem("currentUser", JSON.stringify(newUserDataObject));
+
         window.location.href = "plan_event.html";   
         // let retrievedUserDataObject = JSON.parse(localStorage.getItem("UserDataObject"));
     } else {
@@ -23,36 +34,24 @@ function register() {
 
         alert("Password's do not Match");
     }
-
-    
-    
- 
 }
 
 function validatePassword(password, confirmPassword) {
     if (password === confirmPassword){
         return true;
     } else {
-
-        return false
-        
+        return false 
     }
-    
-
-
 }
 
-
-
 function createUserDataObject(fname, lname, email, password) {
-    let userID = Math.random()
     let currentDate =  new Date().toISOString().split('T')[0];
     let referral_source;
     let account_status;
     let last_login_date = new Date().toISOString().split('T')[0];
     let timezone;
 
-    let username;
+    let username = email;
     let gender;
     let phone;
     let birthday;
@@ -63,7 +62,6 @@ function createUserDataObject(fname, lname, email, password) {
 
     let UserDataObject = {
         usermeta:{
-            userID: userID,
             account_creation_date: currentDate,
             referral_source: referral_source,
             account_status: account_status,
@@ -81,7 +79,7 @@ function createUserDataObject(fname, lname, email, password) {
             password: password
         },
         userstatistics:{
-            user_current_events: user_current_events,
+            user_current_events: {},
             total_events_created: total_events_created,
             total_events_joined: total_events_joined
         }
