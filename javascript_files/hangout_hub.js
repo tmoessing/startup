@@ -1,7 +1,7 @@
 let sortDirection = 1;
 
 function loadTable(data = recieveData()) {
-    if (!!data && data.length > 1) {
+    if (!!data && data.length != 0) {
       currentData = data;
       const headers = parseHeader(data);
       const tableElement = generateTable(headers, data);
@@ -11,7 +11,9 @@ function loadTable(data = recieveData()) {
       removeAllChildNodes(output);
       output.appendChild(tableElement);
     } else {
-      outputData("invalid input", data);
+      // outputData("invalid input", data);
+      const table_box  = document.querySelector('#table');
+      table_box.innerHTML = `<p>There are no planned events. To create one click <a href="plan_event.html">here</a> to be redirected to the Plan Event Page</p>`;
     }
   }
   
@@ -92,21 +94,5 @@ function loadTable(data = recieveData()) {
 
 function recieveData() {
     let dataobject = JSON.parse(localStorage.getItem("eventData"))
-    if (dataobject.length === 0){
-
-    }
-    else {
-      return dataobject;
-    }
-   
-    
-    }
-
-
-// const sampleData = [
-//     { Activity: "Take Five", Date: "Dave Brubeck", Time: 4.8, Location: "SFH" },
-//     { Activity: "So What", Date: "Miles Davis", Time: 3.8, Location: "SFH" },
-//     { Activity: "Take The A Train", Date: "Duke Ellington", Time: 4.2, Location: "SFH" },
-//     { Activity: "Round Midnight", Date: "Thelonious Monk", Time: 3.1, Location: "SFH" },
-//     { Activity: "My Favorite Things", Date: "John Coltrane", Time: 3., Location: "SFH" }
-//   ];
+    return dataobject;
+}

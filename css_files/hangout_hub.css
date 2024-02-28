@@ -49,7 +49,6 @@ table tbody tr {
 }
 
 /* Weather */
-
 .weather h2 {
     font-size: 3vh;
 }
@@ -68,4 +67,14 @@ table tbody tr {
     top: 0;
     right: 0;
     margin-right: 5vh;
+}
+
+
+#table p {
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+#table a {
+    color: rgba(255,50,175, 1);
 }
