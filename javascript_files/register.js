@@ -36,7 +36,7 @@ function register() {
     }
 
         
-    let UserID = newUserID();
+    // let UserID = newUserID();
 
     // Update Current Users
     // localStorage.setItem("currentUser", JSON.stringify({[UserID]: UserDataObject}));
