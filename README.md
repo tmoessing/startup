@@ -63,7 +63,7 @@ For this deliverable I built out the structure of my application using HTML.
 - Support for future login - A user can register and log in. this data is stored of local storage
 - Support for future database data - A insertion of an event on the Plan Event Page will push to local storage. The hangout hub will pull from local storage
 - support for future WebSocket - Using the SetInterval Function, on the Plan Event Page, shows when a user plans events. Will be replaced with websocket
-- support for your application's interaction logic - Users will be able to see all events created on the hangout hub page
+- support for your application's interaction logic - Users will be able to see all events created on the hangout hub page. Will automatically delete events that have past and will prevent users from creating events that have happened in the past
 
 ### Serivce Deiliverable
 ### DB/Login Deliverable
