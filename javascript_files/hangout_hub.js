@@ -97,8 +97,8 @@ function processdata(dataobject) {
 	// currentDate = year + "-" + month + "-" + day;
 
 	let currentTime = new Date();
-	let currenthour = currentTime.getHours();
-	let currentminute = currentTime.getMinutes();
+	let currentHour = currentTime.getHours();
+	let currentMinute = currentTime.getMinutes();
 	// currentTime = hours + ":" + minutes;
 
 
