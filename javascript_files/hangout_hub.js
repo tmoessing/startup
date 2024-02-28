@@ -16,7 +16,7 @@ function loadTable(data = recieveData()) {
     }
   }
   
-  function parseHeader(data) {
+function parseHeader(data) {
     let headers = [];
     for (const [key, value] of Object.entries(data[0])) {
       headers.push({ name: key, type: typeof value });
@@ -24,7 +24,7 @@ function loadTable(data = recieveData()) {
     return headers;
   }
   
-  function generateTable(headers, data) {
+function generateTable(headers, data) {
     const tableElement = document.createElement("table");
   
     generateHeader(headers, tableElement);
@@ -33,7 +33,7 @@ function loadTable(data = recieveData()) {
     return tableElement;
   }
   
-  function generateHeader(headers, tableElement) {
+function generateHeader(headers, tableElement) {
     const rowElement = document.createElement("tr");
     tableElement.appendChild(rowElement);
   
@@ -47,7 +47,7 @@ function loadTable(data = recieveData()) {
     });
   }
   
-  function generateRows(data, tableElement) {
+function generateRows(data, tableElement) {
     data.forEach((dataRow) => {
       const rowElement = document.createElement("tr");
       tableElement.appendChild(rowElement);
@@ -61,33 +61,98 @@ function loadTable(data = recieveData()) {
   }
 
   
-  function insertRule(rule) {
+function insertRule(rule) {
     var sheet = window.document.styleSheets[0];
     sheet.insertRule(rule, sheet.cssRules.length);
   }
   
-  function sortColumn(column) {
+function sortColumn(column) {
     sortDirection *= -1;
     const sortBy = column.innerText;
     const sortedData = currentData.sort(
-      (a, b) => sortDirection * (a[sortBy] > b[sortBy] ? 1 : -1)
+    	(a, b) => sortDirection * (a[sortBy] > b[sortBy] ? 1 : -1)
     );
     table(sortedData);
   }
   
-  function removeAllChildNodes(parent) {
+function removeAllChildNodes(parent) {
     while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
+    	parent.removeChild(parent.firstChild);
     }
   }
 
 function recieveData() {
     processdata()
     let dataobject = JSON.parse(localStorage.getItem("eventData"))
+    
     return dataobject;
 }
 
 
-function processdata() {
-    
+function processdata(dataobject) {
+	let currentDate = new Date();
+	let currentYear = currentDate.getFullYear();
+	let currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so we add 1
+	let currentDay = String(currentDate.getDate()).padStart(2, '0');
+	// currentDate = year + "-" + month + "-" + day;
+
+	let currentTime = new Date();
+	let currenthour = currentTime.getHours();
+	let currentminute = currentTime.getMinutes();
+	// currentTime = hours + ":" + minutes;
+
+
+
+    let eventList = JSON.parse(localStorage.getItem("eventData"));
+	// Look at each event
+	for (let event of eventList) {
+		let [eventYear, eventMonth, eventDay] = event["Date"].split('-').map(Number);
+		let [eventHour, eventMinute] = event["Time"].split(":").map(Number);
+
+		if (currentYear < eventYear) {
+			continue;
+		} else if (currentYear > eventYear) {
+			eventList = eventList.filter(item => item !== event);
+		} else {
+			// currentYear is equal to eventYear, check month
+			if (currentMonth < eventMonth) {
+				continue;
+			} else if (currentMonth > eventMonth) {
+				// event has already occurred this month
+				eventList = eventList.filter(item => item !== event);
+			} else {
+				// currentMonth is equal to eventMonth, check day
+				if (currentDay < eventDay) {
+					continue;
+				} else if (currentDay > eventDay) {
+					// event has already occurred today
+					eventList = eventList.filter(item => item !== event);
+				} else {
+					// currentDay is equal to eventDay, check hour
+					if (currentHour < eventHour) {
+						continue;
+					} else if (currentHour > eventHour) {
+						// event has already occurred this hour
+						eventList = eventList.filter(item => item !== event);
+					} else {
+						// currentHour is equal to eventHour, check minute
+						if (currentMinute < eventMinute) {
+							continue;
+						} else if (currentMinute > eventMinute) {
+							// event has already occurred this minute
+							eventList = eventList.filter(item => item !== event);
+						} else {
+							// The event is happening right now!
+						}
+					}
+				}
+			}
+		}
+		
+		// Remove element forom eventList
+		
+	}
+
+	localStorage.setItem("eventData", JSON.stringify(eventList));
+
 }
