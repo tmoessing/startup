@@ -32,9 +32,24 @@ function getRandomTime() {
 
 
 // Set limits for input boxes
-let currentDateandTime =  new Date().toISOString().split('T')[0]
-// console.log(currentDateandTime)
-document.getElementById('date').min = currentDateandTime
+let currentDate = new Date();
+let currentYear = currentDate.getFullYear();
+let currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so we add 1
+let currentDay = String(currentDate.getDate()).padStart(2, '0');
+currentDate = currentYear + "-" + currentMonth + "-" + currentDay;
+
+document.getElementById('date').min = currentDate
+
+if (document.getElementById("date").value === currentDate) {
+    let currentTime = new Date();
+    let currenthour = currentTime.getHours();
+    let currentminute = currentTime.getMinutes();
+    currentTime = currenthour + ":" + currentminute;
+
+    alert("Please don't schedule a time that has already happened")
+}
+
+
 
 function newEvent() {
     let event_activity = document.getElementById("activity").value;
@@ -46,6 +61,33 @@ function newEvent() {
         alert("Please fill out all required fields.");
         return;
     }
+
+    if (document.getElementById("date").value === currentDate) {
+        let currentTime = new Date();
+        let currentHour = currentTime.getHours();
+        let currentMinute = currentTime.getMinutes();
+
+        let [eventHour, eventMinute] = event_time.split(":").map(Number);
+
+        if (currentHour < eventHour) {
+        } else if (currentHour > eventHour) {
+            // event has already occurred this hour
+            alert("Please don't schedule a time that has already happened");
+            return;
+        } else {
+            // currentHour is equal to eventHour, check minute
+            if (currentMinute < eventMinute) {
+            } else if (currentMinute > eventMinute) {
+                // event has already occurred this minute
+                alert("Please don't schedule a time that has already happened");
+                return;
+            } else {
+                alert("Please don't schedule a time that has already happened");
+                return;
+            }
+        }
+    }
+
 
     // let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
 
@@ -70,7 +112,6 @@ function newEvent() {
     let retrievdEventList = JSON.parse(localStorage.getItem("eventData"));
 
     retrievdEventList.push(EventObject);
-
 
     localStorage.setItem("eventData", JSON.stringify(retrievdEventList));
     
