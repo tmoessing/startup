@@ -690,3 +690,301 @@ function deleteElement(elementSelector) {
 
 deleteElement('#courses div');
 ```
+
+## The Internet
+
+use dig to get IP address
+
+Once you have the IP address, you connect to the device it represents by first asking for a connection route to the device. A connection route consists of many hops across the network until the destination is dynamically discovered and the connection established. With the connection the transport and application layers start exchanging data.
+
+You can determine the hops in a connection using traceroute
+
+The actual sending of data across the internet uses the TCP/IP model. This is a layered architecture that covers everything from the physical wires to the data that a web application sends. At the top of the TCP/IP protocol is the application layer. It represents user functionality, such as the web (HTTP), mail (SMTP), files (FTP), remote shell (SSH), and chat (IRC). Underneath that is the transport layer which breaks the application layer's information into small chunks and sends the data. The actual connection is made using the internet layer. This finds the device you want to talk to and keeps the connection alive. Finally, at the bottom of the model is the link layer which deals with the physical connections and hardware.
+
+- Application	HTTPS	Functionality like web browsing
+
+- Transport	TCP	Moving connection information packets
+
+- Internet	IP	Establishing connections
+
+- Link	Fiber, hardware	Physical connections
+
+A web server is a computing device that is hosting a web service that knows how to accept incoming internet connections and speak the HTTP application protocol.
+
+Since it is so easy to build web services it is common to find multiple web services running on the same computing device. The trick is exposing the multiple services in a way that a connection can be made to each of them. Every network device allows for separate network connections by referring to a unique port number. Each service on the device starts up on a different port. In the example above, the go web service was using port 80. So you could just have a user access each service by referring to the port it was launched on. However, this makes it difficult for the user of the services to remember what port matches to which service. To resolve this we introduce a service gateway, or sometimes called a reverse proxy, that is itself a simple web service that listens on the common HTTPS port 443. The gateway then looks at the request and maps it to the other services running on a different ports.
+
+## Domain
+
+Every DNS server in the world references a few special DNS servers that are considered the authoritative name servers for associating a domain name with an IP address.
+
+address (A) and the canonical name (CNAME) records. An A record is a straight mapping from a domain name to IP address. A CNAME record maps one domain name to another domain name. This acts as a domain name alias. You would use a CNAME to do things like map byu.com to the same IP address as byu.edu so that either one could be used.
+
+## URL
+
+```
+https://byu.edu:443/cs/260/student?filter=accepted#summary
+<scheme>://<domain name>:<port>/<path>?<parameters>#<anchor>
+```
+
+- Scheme	https	The protocol required to ask for the resource. For web applications, this is usually HTTPS. But it could be any internet protocol such as FTP or MAILTO.
+
+- Domain name	byu.edu	The domain name that owns the resource represented by the URL.
+
+- Port	3000	The port specifies the numbered network port used to connect to the domain server. Lower number ports are reserved for common internet protocols, higher number ports can be used for any purpose. The default port is 80 if the scheme is HTTP, or 443 if the scheme is HTTPS.
+
+- Path	/school/byu/user/8014	The path to the resource on the domain. The resource does not have to physically be located on the file system with this path. It can be a logical path representing endpoint parameters, a database table, or an object schema.
+
+- Parameters	filter=names&highlight=intro,summary	The parameters represent a list of key value pairs. Usually it provides additional qualifiers on the resource represented by the path. This might be a filter on the returned resource or how to highlight the resource. The parameters are also sometimes called the query string.
+
+- Anchor	summary	The anchor usually represents a sub-location in the resource. For HTML pages this represents a request for the browser to automatically scroll to the element with an ID that matches the anchor. The anchor is also sometimes called the hash, or fragment ID.
+
+
+- 20	File Transfer Protocol (FTP) for data transfer
+
+- 22	Secure Shell (SSH) for connecting to remote devices
+
+- 25	Simple Mail Transfer Protocol (SMTP) for sending email
+
+- 53	Domain Name System (DNS) for looking up IP addresses
+
+- 80	Hypertext Transfer Protocol (HTTP) for web requests
+
+- 110	Post Office Protocol (POP3) for retrieving email
+
+- 123	Network Time Protocol (NTP) for managing time
+
+- 161	Simple Network Management Protocol (SNMP) for managing network devices such as routers or printers
+
+- 194	Internet Relay Chat (IRC) for chatting
+
+- 443	HTTP Secure (HTTPS) for secure web requests
+
+## HTTP
+
+Hypertext Transfer Protocol (HTTP) is how the web talks. When a web browser makes a request to a web server it does it using the HTTP protocol. In previous instruction we discussed how to use HTTP. Now, we will talk about the internals of HTTP. Just like becoming fluent in a foreign language makes a visit to another country more enjoyable, understanding how to speak HTTP helps you communicate effectively when talking on the web.
+
+When a web client (e.g. a web browser) and a web server talk they exchange HTTP requests and responses. The browser will make an HTTP request and the server will generate an HTTP response. You can see the HTTP exchange by using the browser's debugger or by using a console tool like curl. For example, in your console you can use curl to make the following request.
+
+## Request
+
+The HTTP request for the above command would look like the following.
+
+```
+GET /hypertext/WWW/Helping.html HTTP/1.1
+Host: info.cern.ch
+Accept: text/html
+An HTTP request has this general syntax.
+```
+
+```
+<verb> <url path, parameters, anchor> <version>
+[<header key: value>]*
+[
+
+  <body>
+]
+```
+
+## Response 
+
+```
+HTTP/1.1 200 OK
+Date: Tue, 06 Dec 2022 21:54:42 GMT
+Server: Apache
+Last-Modified: Thu, 29 Oct 1992 11:15:20 GMT
+ETag: "5f0-28f29422b8200"
+Accept-Ranges: bytes
+Content-Length: 1520
+Connection: close
+Content-Type: text/html
+
+<TITLE>Helping -- /WWW</TITLE>
+<NEXTID 7>
+<H1>How can I help?</H1>There are lots of ways you can help if you are interested in seeing
+the <A NAME=4 HREF=TheProject.html>web</A> grow and be even more useful...
+```
+
+An HTTP response has the following syntax.
+
+```
+<version> <status code> <status string>
+[<header key: value>]*
+[
+
+  <body>
+]
+```
+
+
+- GET	Get the requested resource. This can represent a request to get a single resource or a resource representing a list of resources.
+
+- POST	Create a new resource. The body of the request contains the resource. The response should include a unique ID of the newly created resource.
+
+- PUT	Update a resource. Either the URL path, HTTP header, or body must contain the unique ID of the resource being updated. The body of the request should contain the updated resource. The body of the response may contain the resulting updated resource.
+
+- DELETE	Delete a resource. Either the URL path or HTTP header must contain the unique ID of the resource to delete.
+
+- OPTIONS	Get metadata about a resource. Usually only HTTP headers are returned. The resource itself is not returned.
+
+## Status Codes
+
+It is important that you use the standard HTTP status codes in your HTTP responses so that the client of a request can know how to interpret the response. The codes are partitioned into five blocks.
+
+- 1xx - Informational.
+
+- 2xx - Success.
+
+- 3xx - Redirect to some other location, or that the previously cached resource is still valid.
+
+- 4xx - Client errors. The request is invalid.
+
+- 5xx - Server errors. The request cannot be satisfied due to an error on the server.
+
+
+- 100	Continue	The service is working on the request
+
+- 200	Success	The requested resource was found and returned as appropriate.
+
+- 201	Created	The request was successful and a new resource was created.
+
+- 204	No Content	The request was successful but no resource is returned.
+
+- 304	Not Modified	The cached version of the resource is still valid.
+
+- 307	Permanent redirect	The resource is no longer at the requested location. The new location is specified in the response location header.
+
+- 308	Temporary redirect	The resource is temporarily located at a different location. The temporary location is specified in the response location header.
+
+- 400	Bad request	The request was malformed or invalid.
+
+- 401	Unauthorized	The request did not provide a valid authentication token.
+
+- 403	Forbidden	The provided authentication token is not authorized for the resource.
+
+- 404	Not found	An unknown resource was requested.
+
+- 408	Request timeout	The request takes too long.
+
+- 409	Conflict	The provided resource represents an out of date version of the resource.
+
+- 418	I'm a teapot	The service refuses to brew coffee in a teapot.
+
+- 429	Too many requests	The client is making too many requests in too short of a time period.
+
+- 500	Internal server error	The server failed to properly process the request.
+
+- 503	Service unavailable	The server is temporarily down. The client should try again with an exponential back off.
+
+## Headers
+
+HTTP headers specify metadata about a request or response. This includes things like how to handle security, caching, data formats, and cookies. Some common headers that you will use include the following.
+
+- Authorization	Bearer bGciOiJIUzI1NiIsI	A token that authorized the user making the request.
+
+- Accept	image/*	The format the client accepts. This may include wildcards.
+
+- Content-Type	text/html; charset=utf-8	The format of the content being sent. These are described using standard MIME types.
+
+- Cookie	SessionID=39s8cgj34; csrftoken=9dck2	Key value pairs that are generated by the server and stored on the client.
+
+- Host	info.cern.ch	The domain name of the server. This is required in all requests.
+
+- Origin	cs260.click	Identifies the origin that caused the request. A host may only allow requests from specific origins.
+
+- Access-Control-Allow-Origin	https://cs260.click	Server response of what origins can make a request. This may include a wildcard.
+
+- Content-Length	368	The number of bytes contained in the response.
+
+- Cache-Control	public, max-age=604800	Tells the client how it can cache the response.
+
+- User-Agent	Mozilla/5.0 (Macintosh)	The client application making the request.
+
+## Cookies
+
+HTTP itself is stateless. This means that one HTTP request does not know anything about a previous or future request. However, that does not mean that a server or client cannot track state across requests. One common method for tracking state is the cookie. Cookies are generated by a server and passed to the client as an HTTP header.
+
+This allows the server to remember things like the language preference of the user, or the user's authentication credentials. A server can also use cookies to track, and share, everything that a user does. However, there is nothing inherently evil about cookies; the problem comes from web applications that use them as a means to violate a user's privacy or inappropriately monetize their data.
+
+## Node Package Manager
+While you could write all of the JavaScript for everything you need, it is always helpful to use preexisting packages of JavaScript for implementing common tasks. To load a package using Node.js you must take two steps. First install the package locally on your machine using the Node Package Manager (NPM), and then include a require statement in your code that references the package name. NPM is automatically installed when you install Node.js.
+
+NPM knows how to access a massive repository of preexisting packages. You can search for packages on the NPM website. However, before you start using NPM to install packages you need to initialize your code to use NPM. This is done by creating a directory that will contain your JavaScript and then running npm init. NPM will step you through a series of questions about the project you are creating. You can press the return key for each of questions if you want to accept the defaults. If you are always going to accept all of the defaults you can use npm init -y and skip the Q&A.
+
+If you list the files in the directory you will notice that it has created a file named package.json. This file contains three main things: 1) Metadata about your project such as its name and the default entry JavaScript file, 2) commands (scripts) that you can execute to do things like run, test, or distribute your code, and 3) packages that this project depends upon. The following shows what your package.json looks like currently. It has some default metadata and a simple placeholder script that just runs the echo command when you execute npm run test from the console.
+
+```
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
+```
+
+Can use npm install
+
+```
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "Simple Node.js demo",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "give-me-a-joke": "^0.5.1"
+  }
+}
+```
+
+the index.js to run looks like
+
+```
+const giveMeAJoke = require('give-me-a-joke');
+giveMeAJoke.getRandomDadJoke((joke) => {
+  console.log(joke);
+});
+```
+
+Steps
+
+- Create your project directory
+
+- Initialize it for use with NPM by running npm init -y
+
+- Make sure .gitignore file contains node_modules
+
+- Install any desired packages with npm install <package name here>
+
+- Add require('<package name here>') to your application's JavaScript
+
+- Use the code the package provides in your JavaScript
+
+- Run your code with node index.js
+
+## Creating a web service
+http is built in
+
+```
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write(`<h1>Hello Node.js! [${req.method}] ${req.url}</h1>`);
+  res.end();
+});
+
+server.listen(8080, () => {
+  console.log(`Web service listening on port 8080`);
+});
+```
+
+This code uses the Node.js built-in http package to create our HTTP server using the http.createServer function along with a callback function that takes a request (req) and response (res) object. That function is called whenever the server receives an HTTP request. In our example, the callback always returns the same HTML snippet, with a status code of 200, and a Content-Type header, no matter what request is made. Basically this is just a simple dynamically generated HTML page. A real web service would examine the HTTP path and return meaningful content based upon the purpose of the endpoint.
+
+The server.listen call starts listening on port 8080 and blocks until the program is terminated.
