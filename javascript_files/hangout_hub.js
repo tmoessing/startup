@@ -156,3 +156,15 @@ function processdata(dataobject) {
 	localStorage.setItem("eventData", JSON.stringify(eventList));
 
 }
+
+
+function displayWeather() {
+  const url = "http://dataservice.accuweather.com/currentconditions/v1/331215?apikey=qMnw1YnoAqsJNLNgnxVPu7uk6wPbGamA"
+  fetch(url)
+    .then((x => x.json()))
+    .then((response) => {
+      document.querySelector("#weather").textContent = response[0].Temperature.Imperial.Value + "° " + response[0].Temperature.Imperial.Unit;
+    })
+}
+
+displayWeather();
