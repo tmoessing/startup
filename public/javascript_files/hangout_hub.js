@@ -167,4 +167,14 @@ function displayWeather() {
     })
 }
 
+async function loadEvents() {
+  let events = [];
+  try {
+    const response = await fetch('/events');
+    scores = await response.json();
+  } catch {
+    console.log("Trouble in River City");
+  }
+}
 displayWeather();
+loadEvents();
