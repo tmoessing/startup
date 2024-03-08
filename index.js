@@ -9,7 +9,10 @@ app.use(express.static('public'));
 
 app.listen(3000);
 
-app.get('/events', (req, res) => {res.send(events);});
+app.get('/events', (req, res) => {
+    console.log("INSIDE BACKEND IT'S A PARTY");
+    res.send(events);
+});
 
 app.get('/create-event', (req, res) => {
     events = updateEvents(req.body, scores);
@@ -17,11 +20,10 @@ app.get('/create-event', (req, res) => {
     });
 
 // Event Storage
-let events = [];
+let events = [{"Activity":"Basketball","Date":"2024-03-26","Time":"08:42","Location":"6878 S Riverwood Way, Aurora CO 80016"}];
 function updateEvents(event, events) {
-    let found = false;
 
-    events.push(events);
+    events.push(event);
 
-    return scores;
+    return events;
 }

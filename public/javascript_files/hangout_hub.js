@@ -1,6 +1,6 @@
 let sortDirection = 1;
 
-function loadTable(data = recieveData()) {
+function loadTable() {
     if (!!data && data.length != 0) {
       currentData = data;
       const headers = parseHeader(data);
@@ -81,14 +81,6 @@ function removeAllChildNodes(parent) {
     }
   }
 
-function recieveData() {
-    processdata()
-    let dataobject = JSON.parse(localStorage.getItem("eventData"))
-    
-    return dataobject;
-}
-
-
 function processdata(dataobject) {
 	let currentDate = new Date();
 	let currentYear = currentDate.getFullYear();
@@ -101,9 +93,7 @@ function processdata(dataobject) {
 	let currentMinute = currentTime.getMinutes();
 	// currentTime = hours + ":" + minutes;
 
-
-
-    let eventList = JSON.parse(localStorage.getItem("eventData"));
+  let eventList = JSON.parse(localStorage.getItem("eventData"));
 	// Look at each event
 	for (let event of eventList) {
 		let [eventYear, eventMonth, eventDay] = event["Date"].split('-').map(Number);
@@ -170,11 +160,22 @@ function displayWeather() {
 async function loadEvents() {
   let events = [];
   try {
+    // Request List of Event Objects
     const response = await fetch('/events');
-    scores = await response.json();
+    events = await response.json();
+
+    console.log("Inside loadEvents")
+    console.log(events);
+
+    loadTable(events)
+
+    return events;
   } catch {
-    console.log("Trouble in River City");
+    console.log("Trouble in River City: Couldn't connect to Backend");
   }
+
 }
-displayWeather();
+// displayWeather(); #ONot Connected to Internet
+// console.log("Trouble in River City");
 loadEvents();
+
