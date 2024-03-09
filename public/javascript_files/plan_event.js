@@ -88,32 +88,10 @@ function newEvent() {
         }
     }
 
-
-    // let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
-
-    // let retrievdEventObject = JSON.parse(storedValue);
-    // let newEventObject = retrievdEventObject;
-
-    // newUserDataObject["total_events"] += 1;
-    // let event_ID = newUserDataObject["total_events"];
-
-    // Object.assign(newEventObject, {[event_ID]: EventObject});
-
-    // localStorage.setItem("eventData", JSON.stringify(newEventObject));
-
-    // storeEvent();
-
-    // window.location.href = "hangout_hub.html";
-
     
 
     let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
-    
-    let retrievdEventList = JSON.parse(localStorage.getItem("eventData"));
-
-    retrievdEventList.push(EventObject);
-
-    localStorage.setItem("eventData", JSON.stringify(retrievdEventList));
+    serverCreateEvent(EventObject)
     
     window.location.href = "hangout_hub.html";
     
@@ -140,14 +118,26 @@ function createEventObject(event_activity, event_date, event_time, event_locatio
     };
 
 
-function getEventAuthor() {
-    let currentUserObject = JSON.parse(localStorage.getItem("currentUser"));
-    user_name = currentUserObject[first_name] + "" + currentUserObject[last_name];
-    return user_name;
-}
+// function getEventAuthor() {
+//     let currentUserObject = JSON.parse(localStorage.getItem("currentUser"));
+//     user_name = currentUserObject[first_name] + "" + currentUserObject[last_name];
+//     return user_name;
+// }
 
 function storeEvent() {
     let currentUserObject = JSON.parse(localStorage.getItem("currentUser"));
     currentUserObject[user_statisticsz][total_events_created] += 1;
     usersEvents = currentUserObject[user_statisticsz][user_current_events]
+}
+
+async function serverCreateEvent(EventObject) {
+    try {
+        const response = await fetch('/create-event', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(EventObject),
+        });
+    } catch {
+        console.log("Error creating event");
+    }
 }

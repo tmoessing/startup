@@ -9,6 +9,7 @@ app.use(express.static('public'));
 
 app.listen(3000);
 
+// Get Events
 app.get('/events', (req, res) => {
     // Get rid of old events
     removeOldEvents()
@@ -16,10 +17,12 @@ app.get('/events', (req, res) => {
     res.send(event_list);
 });
 
-// app.get('/create-event', (req, res) => {
-//     updateEventList(req.body, );
-//     res.send(event_list))
-//     });
+// Create Event
+app.post('/create-event', (req, res) => {
+    updateEventList(req.body, event_list);
+	
+    res.send(event_list);
+    });
 
 // Event Storage
 let event_list = [{"Activity":"Basketball","Date":"2024-03-26","Time":"08:42","Location":"6878 S Riverwood Way, Aurora CO 80016"},
