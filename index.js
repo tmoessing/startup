@@ -20,21 +20,12 @@ app.get('/events', (req, res) => {
 // Create Event
 app.post('/create-event', (req, res) => {
     updateEventList(req.body, event_list);
-	
+
     res.send(event_list);
     });
 
 // Event Storage
-let event_list = [{"Activity":"Basketball","Date":"2024-03-26","Time":"08:42","Location":"6878 S Riverwood Way, Aurora CO 80016"},
-                {"Activity":"Basketball","Date":"2023-03-26","Time":"08:42","Location":"6878 S Riverwood Way, Aurora CO 80016"},
-                {"Activity":"Basketball","Date":"2024-02-26","Time":"08:42","Location":"6878 S Riverwood Way, Aurora CO 80016"},
-                {"Activity":"Basketball","Date":"2024-03-07","Time":"08:42","Location":"6878 S Riverwood Way, Aurora CO 80016"},
-                {"Activity":"Basketball","Date":"2024-03-08","Time":"06:42","Location":"6878 S Riverwood Way, Aurora CO 80016"},
-                {"Activity":"Basketball","Date":"2024-03-08","Time":"09:10","Location":"6878 S Riverwood Way, Aurora CO 80016"},
-                {"Activity":"Tennis","Date":"2024-03-26","Time":"08:42","Location":"6878 S Riverwood Way, Aurora CO 80016"},
-                {"Activity":"Pickleball","Date":"2024-03-26","Time":"08:42","Location":"6878 S Riverwood Way, Aurora CO 80016"},
-
-];
+let event_list = [];
 
 // Update Events
 function updateEventList(event, event_list) {
