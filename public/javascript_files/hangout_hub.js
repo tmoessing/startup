@@ -1,6 +1,6 @@
 let sortDirection = 1;
 
-function loadTable() {
+function loadTable(data) {
     if (!!data && data.length != 0) {
       currentData = data;
       const headers = parseHeader(data);
@@ -81,73 +81,6 @@ function removeAllChildNodes(parent) {
     }
   }
 
-function processdata(dataobject) {
-	let currentDate = new Date();
-	let currentYear = currentDate.getFullYear();
-	let currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so we add 1
-	let currentDay = String(currentDate.getDate()).padStart(2, '0');
-	// currentDate = year + "-" + month + "-" + day;
-
-	let currentTime = new Date();
-	let currentHour = currentTime.getHours();
-	let currentMinute = currentTime.getMinutes();
-	// currentTime = hours + ":" + minutes;
-
-  let eventList = JSON.parse(localStorage.getItem("eventData"));
-	// Look at each event
-	for (let event of eventList) {
-		let [eventYear, eventMonth, eventDay] = event["Date"].split('-').map(Number);
-		let [eventHour, eventMinute] = event["Time"].split(":").map(Number);
-
-		if (currentYear < eventYear) {
-			continue;
-		} else if (currentYear > eventYear) {
-			eventList = eventList.filter(item => item !== event);
-		} else {
-			// currentYear is equal to eventYear, check month
-			if (currentMonth < eventMonth) {
-				continue;
-			} else if (currentMonth > eventMonth) {
-				// event has already occurred this month
-				eventList = eventList.filter(item => item !== event);
-			} else {
-				// currentMonth is equal to eventMonth, check day
-				if (currentDay < eventDay) {
-					continue;
-				} else if (currentDay > eventDay) {
-					// event has already occurred today
-					eventList = eventList.filter(item => item !== event);
-				} else {
-					// currentDay is equal to eventDay, check hour
-					if (currentHour < eventHour) {
-						continue;
-					} else if (currentHour > eventHour) {
-						// event has already occurred this hour
-						eventList = eventList.filter(item => item !== event);
-					} else {
-						// currentHour is equal to eventHour, check minute
-						if (currentMinute < eventMinute) {
-							continue;
-						} else if (currentMinute > eventMinute) {
-							// event has already occurred this minute
-							eventList = eventList.filter(item => item !== event);
-						} else {
-							// The event is happening right now!
-						}
-					}
-				}
-			}
-		}
-		
-		// Remove element forom eventList
-		
-	}
-
-	localStorage.setItem("eventData", JSON.stringify(eventList));
-
-}
-
-
 function displayWeather() {
   const url = "http://dataservice.accuweather.com/currentconditions/v1/331215?apikey=qMnw1YnoAqsJNLNgnxVPu7uk6wPbGamA"
   fetch(url)
@@ -155,6 +88,7 @@ function displayWeather() {
     .then((response) => {
       document.querySelector("#weather").textContent = response[0].Temperature.Imperial.Value + "° " + response[0].Temperature.Imperial.Unit;
     })
+    .catch(document.querySelector("#weather").textContent = "Not Connected")
 }
 
 async function loadEvents() {
@@ -164,18 +98,15 @@ async function loadEvents() {
     const response = await fetch('/events');
     events = await response.json();
 
-    console.log("Inside loadEvents")
-    console.log(events);
-
-    loadTable(events)
-
-    return events;
   } catch {
     console.log("Trouble in River City: Couldn't connect to Backend");
   }
+  loadTable(events);
 
 }
-// displayWeather(); #ONot Connected to Internet
-// console.log("Trouble in River City");
+
+// Third Party API Service
+displayWeather();
+
 loadEvents();
 
