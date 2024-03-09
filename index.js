@@ -10,7 +10,7 @@ app.use(express.static('public'));
 app.listen(3000);
 
 // Get Events
-app.get('/events', (req, res) => {
+app.get('/pull-events', (req, res) => {
     // Get rid of old events
     removeOldEvents()
 

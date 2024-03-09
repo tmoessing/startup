@@ -40,7 +40,6 @@ function generateHeader(headers, tableElement) {
     headers.forEach((header) => {
       const cellElement = document.createElement("th");
       rowElement.appendChild(cellElement);
-    //   cellElement.setAttribute("onclick", `sortColumn(this)`);
       cellElement.onclick = () => sortColumn(header.name);
       const textNode = document.createTextNode(header.name);
       cellElement.appendChild(textNode);
@@ -95,7 +94,7 @@ async function loadEvents() {
   let events = [];
   try {
     // Request List of Event Objects
-    const response = await fetch('/events');
+    const response = await fetch('/pull-events');
     events = await response.json();
 
   } catch {
