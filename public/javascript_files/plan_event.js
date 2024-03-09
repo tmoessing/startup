@@ -2,8 +2,6 @@
 setInterval(() => {
     const randomTime = getRandomTime();
     const notificationContainer  = document.querySelector('.notification-section');
-    // notificationContainer .innerHTML = `<aside class="notification"><p><span class="user">Caden</span> planned Basketball at ${randomTime} </p></aside>`;
-    // chatText.innerHTML;
 
     const newNotification = document.createElement('aside');
     newNotification.className = '.notification';
@@ -88,9 +86,8 @@ function newEvent() {
         }
     }
 
-    
-
     let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
+
     serverCreateEvent(EventObject)
     
     window.location.href = "hangout_hub.html";
@@ -116,13 +113,6 @@ function createEventObject(event_activity, event_date, event_time, event_locatio
             Time: event_time,
             Location: event_location}
     };
-
-
-// function getEventAuthor() {
-//     let currentUserObject = JSON.parse(localStorage.getItem("currentUser"));
-//     user_name = currentUserObject[first_name] + "" + currentUserObject[last_name];
-//     return user_name;
-// }
 
 function storeEvent() {
     let currentUserObject = JSON.parse(localStorage.getItem("currentUser"));
