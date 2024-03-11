@@ -1,5 +1,10 @@
+// Create an HTTP service using Node.js and Express
+
 const express = require('express');
 const app = express();
+
+// The service port. In production the front-end code is statically hosted by the service on the same port.
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -7,7 +12,8 @@ app.use(express.json());
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
 
-app.listen(3000);
+
+// Your backend provides service endpoints
 
 // Get Events
 app.get('/pull-events', (req, res) => {
@@ -23,6 +29,19 @@ app.post('/create-event', (req, res) => {
 
     res.send(event_list);
     });
+
+//Frontend served up using Express static middleware
+
+// Return application default page if the path is unknown
+app.use((_req, res) => {
+	res.sendFile('index.html', { root: 'public' });
+  });
+  
+app.listen(port, () => {
+	console.log(`Listening on port ${port}`);
+  });
+
+
 
 // Event Storage
 let event_list = [];
