@@ -66,6 +66,25 @@ For this deliverable I built out the structure of my application using HTML.
 - support for your application's interaction logic - Users will be able to see all events created on the hangout hub page. Will automatically delete events that have past and will prevent users from creating events that have happened in the past
 
 ### Serivce Deiliverable
+
+- Prerequisite: Simon Service deployed to your production environment
+
+- Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+
+- Prerequisite: Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable
+
+- Prerequisite: At least 10 git commits spread consistently throughout the assignment period
+
+- Create an HTTP service using Node.js and Express - Finished
+
+- Frontend served up using Express static middleware - Finished
+
+- Your frontend calls third party service endpoints - On the Hangout Hub the weather for Provo is pulled and showed using the fetch function
+
+- Your backend provides service endpoints - backend endpoints that recieved the event details and returns all the events
+
+- Your frontend calls your service endpoints - Used fetch function
+
 ### DB/Login Deliverable
 ### WebSocket Deliverable
 ### React Deliverable
