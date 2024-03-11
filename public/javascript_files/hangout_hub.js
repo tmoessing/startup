@@ -80,6 +80,7 @@ function removeAllChildNodes(parent) {
     }
   }
 
+// Your frontend calls third party service endpoints
 function displayWeather() {
   const url = "http://dataservice.accuweather.com/currentconditions/v1/331215?apikey=qMnw1YnoAqsJNLNgnxVPu7uk6wPbGamA"
   fetch(url)
