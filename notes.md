@@ -1074,9 +1074,11 @@ You can also add middleware for handling errors that occur. Error middleware loo
 ```function errorMiddlewareName(err, req, res, next)```
 If you wanted to add a simple error handler for anything that might go wrong while processing HTTP requests you could add the following.
 
-```app.use(function (err, req, res, next) {
+```
+app.use(function (err, req, res, next) {
   res.status(500).send({type: err.name, message: err.message});
-});```
+});
+```
 
 We can test that our error middleware is getting used by adding a new endpoint that generates an error.
 
@@ -1147,3 +1149,91 @@ app.listen(port, function () {
   console.log(`Listening on port ${port}`);
 });
 ```
+
+## SOP and CORS
+
+Same Origin Policy (SOP)
+
+ Simply stated SOP only allows JavaScript to make requests to a domain if it is the same domain that the user is currently viewing. A request from byu.iinstructure.com for service endpoints that are made to byu.instructure.com would fail because the domains do not match. This provides significant security, but it also introduces complications when building web applications. For example, if you want build a service that any web application can use it would also violate the SOP and fail. In order to address this, the concept of Cross Origin Resource Sharing (CORS) was invented.
+
+ CORS allows the client (e.g. browser) to specify the origin of a request and then let the server respond with what origins are allowed. The server may say that all origins are allowed, for example if they are a general purpose image provider, or only a specific origin is allowed, for example if they are a bank's authentication service. If the server doesn't specify what origin is allowed then the browser assumes that it must be the same origin.
+
+ # 3rd Party Services
+
+When you make requests to your own web services you are always on the same origin and so you will not violate the SOP. However, if you want to make requests to a different domain than the one your web application is hosted on, then you need to make sure that domain allows requests as defined by the Access-Control-Allow-Origin header it returns. For example, if I have JavaScript in my web application loaded from cs260.click that makes a fetch request for an image from the website i.picsum.photos the browser will fail the request with an HTTP status code of 403 and an error message that CORS has blocked the request.
+
+That happens because i.picsum.photos does not return an Access-Control-Allow-Origin header. Without a header the browser assumes that all requests must be made from the same origin.
+
+## Endpoints
+
+Note that service endpoints are often called an Application Programming Interface (API). This is a throwback to old desktop applications and the programming interfaces that they exposed. Sometimes the term API refers to the entire collection of endpoints, and sometimes it is used to refer to a single endpoint.
+
+## RPC
+
+Remote Procedure Calls (RPC) expose service endpoints as simple function calls. When RPC is used over HTTP it usually just leverages the POST HTTP verb. The actual verb and subject of the function call is represented by the function name. For example, deleteOrder or updateOrder. The name of the function is either the entire path of the URL or a parameter in the POST body.
+
+One advantage of RPC is that it maps directly to function calls that might exist within the server. This could also be considered a disadvantage as it directly exposes the inner workings of the service, and thus creates a coupling between the endpoints and the implementation.
+
+## REST
+
+Representational State Transfer (REST) attempts to take advantage of the foundational principles of HTTP. This is not surprising considering the principle author of REST, Roy Fielding, was also a contributor to the HTTP specification. REST HTTP verbs always act upon a resource. Operations on a resource impact the state of the resource as it is transferred by a REST endpoint call. This allows for the caching functionality of HTTP to work optimally. For example, GET will always return the same resource until a PUT is executed on the resource. When PUT is used, the cached resource is replaced with the updated resource.
+
+With REST the updateOrder endpoint would look like the following.
+
+```
+PUT /order/2197 HTTP/2
+
+{"date": "20220505"}
+```
+
+Where the proper HTTP verb is used and the URL path uniquely identifies the resource. These seem like small differences, but maximizing HTTP pays dividends by making it easy for HTTP infrastructure, such as caching, to work properly.
+
+## GraphQL
+GraphQL focuses on the manipulation of data instead of a function call (RPC) or a resource (REST). The heart of GraphQL is a query that specifies the desired data and how it should be joined and filtered. GraphQL was developed to address frustration concerning the massive number of REST, or RPC calls, that a web application client needed to make in order to support even a simple UI widget.
+
+Instead of making a call for getting a store, and then a bunch of calls for getting the store's orders and employees, GraphQL would send a single query that would request all of that information in one big JSON response. The server would examine the query, join the desired data, and then filter out anything that was not wanted.
+
+Here is an example GraphQL query.
+
+query {
+  getOrder(id: "2197") {
+    orders(filter: {date: {allofterms: "20220505"}}) {
+      store
+      description
+      orderedBy
+    }
+  }
+}
+GraphQL helps to remove a lot of the logic for parsing endpoints and mapping requests to specific resources. Basically in GraphQL there is only one endpoint. The query endpoint.
+
+The downside of that flexibility is that the client now has significant power to consume resources on the server. There is no clear boundary on what, how much, or how complicated the aggregation of data is. It also is difficult for the server to implement authorization rights to data as they have to be baked into the data schema. However, there are standards for how to define a complex schema. Common GraphQL packages provide support for schema implementations along with database adaptors for query support.
+
+## Debugging in VS CODE
+
+
+
+- ```F5``` - Start Debbuging
+
+- ```F10``` - Step to next line
+
+- ```F11``` - Step into Function Calll
+
+- ```SHIFT-F5```  - Stop Debugging
+
+## Nodemon
+The Nodemon package is basically a wrapper around node that watches for files in the project directory to change. When it detects that you saved something it will automatically restart node.
+
+```
+npm install -g nodemon
+```
+
+Then, because VS Code does not know how to launch Nodemon automatically, you need create a VS Code launch configuration. In VS Code press CTRL-SHIFT-P (on Windows) or ⌘-SHIFT-P (on Mac) and type the command Debug: Add configuration. This will then ask you what type of configuration you would like to create. Type Node.js and select the Node.js: Nodemon setup option. In the launch configuration file that it creates, change the program from app.js to main.js (or whatever the main JavaScript file is for your application) and save the configuration file.
+
+Now when you press F5 to start debugging it will run Nodemon instead of Node.js, and your changes will automatically update your application when you save.
+
+## Development & Production Environments
+
+**Steps**
+Continuous integration (CI) processes, checkout the application code, lint it, build it, test it, stage it, test it more, and then finally, if everything checks out, deploy the application to the production environment, and notify the different departments in the company of the release.
+
+Linting is a tool that analyzes sources code to flag programming errors, bugs, stylistic errors. [More Information](https://www.freecodecamp.org/news/what-is-linting-and-how-can-it-save-you-time/)
