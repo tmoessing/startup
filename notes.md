@@ -1237,3 +1237,47 @@ Now when you press F5 to start debugging it will run Nodemon instead of Node.js,
 Continuous integration (CI) processes, checkout the application code, lint it, build it, test it, stage it, test it more, and then finally, if everything checks out, deploy the application to the production environment, and notify the different departments in the company of the release.
 
 Linting is a tool that analyzes sources code to flag programming errors, bugs, stylistic errors. [More Information](https://www.freecodecamp.org/news/what-is-linting-and-how-can-it-save-you-time/)
+
+
+- ```scp``` secure copy program
+
+## Uploading Files
+
+In order to build storage support into our server, we first install the Multer NPM package to our project. There are other NPM packages that we can chose from, but Multer is commonly used. From your project directory, run the following console command.
+
+```npm install multer```
+
+Multer handles reading the file from the HTTP request, enforcing the size limit of the upload, and storing the file in the uploads directory. Additionally our service code does the following:
+
+- Handles requests for static files so that we can serve up our frontend code.
+
+- Handles errors such as when the 64k file limit is violated.
+
+- Provides a GET endpoint to serve up a file from the uploads directory.
+
+```
+const multer = require('multer');
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: 'uploads/',
+    filename: (req, file, cb) => {
+      const filetype = file.originalname.split('.').pop();
+      const id = Math.round(Math.random() * 1e9);
+      const filename = `${id}.${filetype}`;
+      cb(null, filename);
+    },
+  }),
+  limits: { fileSize: 64000 },
+});
+```
+
+## Data Services
+
+MySQL	Relational queries
+Redis	Memory cached objects
+ElasticSearch	Ranked free text
+MongoDB	JSON objects
+DynamoDB	Key value pairs
+Neo4J	Graph based data
+InfluxDB	Time series data
