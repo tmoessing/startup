@@ -80,16 +80,19 @@ function removeAllChildNodes(parent) {
     }
   }
 
-// Your frontend calls third party service endpoints
-function displayWeather() {
-  const url = "http://dataservice.accuweather.com/currentconditions/v1/331215?apikey=qMnw1YnoAqsJNLNgnxVPu7uk6wPbGamA"
-  fetch(url)
-    .then((x => x.json()))
-    .then((response) => {
-      document.querySelector("#weather").textContent = response[0].Temperature.Imperial.Value + "° " + response[0].Temperature.Imperial.Unit;
-    })
-    .catch(document.querySelector("#weather").textContent = "Not Connected")
-}
+
+// function displayWeather() {
+//   const url = "http://dataservice.accuweather.com/currentconditions/v1/331215?apikey=qMnw1YnoAqsJNLNgnxVPu7uk6wPbGamA"
+//   fetch(url)
+//     .then((x => x.json()))
+//     .then((response) => {
+//       document.querySelector("#weather").textContent = response[0].Temperature.Imperial.Value + "° " + response[0].Temperature.Imperial.Unit;
+//     })
+//     .catch(error => {
+//       console.error('Error:', error);
+//       document.querySelector("#weather").textContent = "Not Connected";
+//     });
+// }
 
 async function loadEvents() {
   let events = [];
@@ -105,8 +108,7 @@ async function loadEvents() {
 
 }
 
-// Third Party API Service
-displayWeather();
+// displayWeather();
 
 loadEvents();
 

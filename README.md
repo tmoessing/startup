@@ -79,7 +79,7 @@ For this deliverable I built out the structure of my application using HTML.
 
 - Frontend served up using Express static middleware - Finished
 
-- Your frontend calls third party service endpoints - On the Hangout Hub the weather for Provo is pulled and showed using the fetch function
+- Your frontend calls third party service endpoints - On the Home Page a random quote is pulled using the fetch function
 
 - Your backend provides service endpoints - backend endpoints that recieved the event details and returns all the events
 
