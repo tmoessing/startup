@@ -5,7 +5,7 @@ const cfg = require('./dbCongfig.json');
 async function connect2Mongo() {
     const url = `mongodb+srv://${cfg.userName}:${cfg.password}@${cfg.hostname}`;
     const client = new MongoClient(url);
-    const db = client.db('weshouldhangout');
+    const db = client.db('eventHub');
     const eventCollection = db.collection('events');
 
     // Test Connection
@@ -22,9 +22,18 @@ async function connect2Mongo() {
 }
 
 async function createEvent(event) {
-    eventCollection = connect2Mongo();
+    const eventCollection =  await connect2Mongo();
+
+    await eventCollection.insertOne(event);
+}
+
+async function pullEvents() {
+    const eventCollection = await connect2Mongo();
     
-      await eventCollection.insertOne(event);
+    const cursor = eventCollection.find();
+    const events = await cursor.toArray();
+
+    console.log(events);
 }
 
 let event = {
@@ -34,4 +43,5 @@ let event = {
     Location: "Courts"
 };
 
-createEvent(event);
+// createEvent(event);
+pullEvents();
