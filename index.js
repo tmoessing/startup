@@ -1,5 +1,6 @@
-// Create an HTTP service using Node.js and Express
+const mongoDB = require('./mongoDB.js');
 
+// Create an HTTP service using Node.js and Express
 const express = require('express');
 const app = express();
 
