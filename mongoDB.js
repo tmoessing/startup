@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 
 const cfg = require('./dbCongfig.json');
 
-async function createEvent(event) {
+async function connect2Mongo() {
     const url = `mongodb+srv://${cfg.userName}:${cfg.password}@${cfg.hostname}`;
     const client = new MongoClient(url);
     const db = client.db('weshouldhangout');
@@ -18,6 +18,12 @@ async function createEvent(event) {
           process.exit(1);
         });
     
+    return eventCollection
+}
+
+async function createEvent(event) {
+    eventCollection = connect2Mongo();
+    
       await eventCollection.insertOne(event);
 }
 
@@ -29,4 +35,3 @@ let event = {
 };
 
 createEvent(event);
-
