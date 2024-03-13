@@ -36,12 +36,7 @@ async function pullEvents() {
     console.log(events);
 }
 
-let event = {
-    Activity: "Basketball",
-    Date: "2024-03-16",
-    Time: "12:00",
-    Location: "Courts"
+module.exports = {
+    createEvent,
+    pullEvents
 };
-
-// createEvent(event);
-pullEvents();
