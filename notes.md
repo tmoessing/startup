@@ -1281,3 +1281,95 @@ MongoDB	JSON objects
 DynamoDB	Key value pairs
 Neo4J	Graph based data
 InfluxDB	Time series data
+
+## Mongo DB
+
+```npm install mongodb```
+
+```
+const { MongoClient } = require('mongodb');
+
+const userName = 'holowaychuk';
+const password = 'express';
+const hostname = 'mongodb.com';
+
+const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+
+const client = new MongoClient(url);
+```
+
+**Inserting**
+
+```
+const collection = client.db('rental').collection('house');
+
+const house = {
+  name: 'Beachfront views',
+  summary: 'From your bedroom to the beach, no shoes required',
+  property_type: 'Condo',
+  beds: 1,
+};
+await collection.insertOne(house);
+```
+
+```
+scores = [
+ { name: 'ryan', score: 3 },
+ { name: 'holowaychuk', score: 83 },
+];
+scoreCollection.insertMany(scores);
+```
+
+**Finding**
+
+```
+db.house.find()
+db.house.find({beds:{$gte:2}})
+db.house.find({status:"open",beds:{$lt: 3}})
+db.house.find({$or:[beds:{$lt: 3},price:{$lt:1000}]})
+db.house.find({summary:/(modern|beach)/i})
+```
+
+```
+const cursor = collection.find();
+const rentals = await cursor.toArray();
+rentals.forEach((i) => console.log(i));
+```
+
+## Testing Connection
+
+```
+client
+ .connect()
+ .then(() => db.command({ ping: 1 }))
+ .then(() => console.log(`Connected`))
+ .catch((ex) => {
+   console.log(`Error with ${url} because ${ex.message}`);
+   process.exit(1);
+ });
+```
+
+## Storing Credentials
+
+Create a dbConfig.json
+
+```
+{
+  "hostname": "cs260.abcdefg.mongodb.net",
+  "userName": "myMongoUserName",
+  "password": "toomanysecrets"
+}
+```
+
+```
+const { MongoClient } = require('mongodb');
+
+const cfg = require('./dbConfig.json');
+const url = `mongodb+srv://${cfg.userName}:${cfg.password}@${cfg.hostname}`;
+
+const client = new MongoClient(url);
+const scoreCollection = client.db('startup').collection('score');
+```
+
+**MAKE SURE TO ADD GITIGNORE**
+
