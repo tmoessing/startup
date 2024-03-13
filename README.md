@@ -86,5 +86,28 @@ For this deliverable I built out the structure of my application using HTML.
 - Your frontend calls your service endpoints - Used fetch function
 
 ### DB/Login Deliverable
+
+
+- **Prerequisite**: Simon Login deployed to your production environment
+
+- **Prerequisite**: A link to your GitHub startup repository prominently displayed on your application's home page
+
+- **Prerequisite**: Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable
+
+- **Prerequisite**: At least 10 git commits spread consistently throughout the assignment period.
+
+- **MongoDB Atlas database created** -
+
+- **Stores data in MongoDB** - 
+
+- **User registration** - 
+
+- **existing user** - 
+
+- **Use MongoDB to store credentials** - 
+
+- **Restricts functionality** - 
+
+
 ### WebSocket Deliverable
 ### React Deliverable
