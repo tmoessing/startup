@@ -2,23 +2,29 @@ function logIn () {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    // Check if User Exists
-    let potenital_password = localStorage.getItem(email);
+    let users_credentials = {
+        email: email,
+        password: password
+    };
 
-    if (potenital_password !== null) {
-        if (potenital_password === password) {
-            localStorage.setItem("currentUser", email);
+    db_user_login(users_credentials);
+}
 
-            window.location.href = "hangout_hub.html";
-        } else {
-            alert("Incorrect Password");
-            document.getElementById("password").value = "";
-        }
-    } else { 
-        alert("No user found. Please Create an Account")
-        window.location.href = "register.html";
+
+async function db_user_login(users_creditnals) {
+    const response = await fetch('/auth/login', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(users_creditnals),
+    });
+
+    if (response.ok) {
+        window.location.href = "plan_event.html";
+
+    } else {
+        const body = await response.json()
+        alert(`⚠ Error: ${body.msg}`)
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
     }
-    
-
-    // window.location.href = "plan_event.html";
 }
