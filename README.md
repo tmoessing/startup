@@ -96,15 +96,15 @@ For this deliverable I built out the structure of my application using HTML.
 
 - **Prerequisite**: At least 10 git commits spread consistently throughout the assignment period.
 
-- **MongoDB Atlas database created** -
+- **MongoDB Atlas database created** - Finished
 
-- **Stores data in MongoDB** - 
+- **Stores data in MongoDB** - Stores All Events on to Database
 
-- **User registration** - 
+- **User registration** - Creates a new account on the database
 
-- **existing user** - 
+- **existing user** - Users can Log in 
 
-- **Use MongoDB to store credentials** - 
+- **Use MongoDB to store credentials** - Stores User Data
 
 - **Restricts functionality** - 
 
