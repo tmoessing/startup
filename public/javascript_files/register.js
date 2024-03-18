@@ -2,16 +2,6 @@
 
 function register() {
     let email = document.getElementById("email").value;
-    // if (!validateNewRegister(email)) {
-    //     document.getElementById("email").value = "";
-    //     document.getElementById("fname").value = "";
-    //     document.getElementById("lname").value = "";
-    //     document.getElementById("password").value = "";
-    //     document.getElementById("confirmPassword").value = "";
-
-    //     alert("Email already used to register");
-    //     return;
-    // }
 
     let fname  = document.getElementById("fname").value;
     let lname = document.getElementById("lname").value;
@@ -38,8 +28,6 @@ function register() {
     let UserObject = createUserDataObject(fname, lname, email, password);
     
     DB_Create_User(UserObject);
-
-    window.location.href = "plan_event.html";
 
 }
 
@@ -97,13 +85,20 @@ function createUserDataObject(fname, lname, email, password) {
 }
 
 async function DB_Create_User(UserObject) {
-    try {
-        const response = await fetch('/auth/create', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(UserObject),
-        });
-    } catch {
-        console.log("Error creating event");
+    const response = await fetch('/auth/create', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(UserObject),
+    });
+    if (response.ok) {
+        window.location.href = "plan_event.html";
+    } else {
+        const body = await response.json();
+        alert(`⚠ Error: ${body.msg}`)
+        document.getElementById("email").value = "";
+        document.getElementById("fname").value = "";
+        document.getElementById("lname").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("confirmPassword").value = "";
     }
 }
