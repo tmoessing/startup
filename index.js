@@ -40,8 +40,7 @@ app.post('/create-event', (req, res) => {
 // Authentication
 app.post('/auth/create', async (req, res) => {
 	if (await mongoDB.getUser(req.body.email)) {
-		res.status(409).send({ msg: 'Existing User' });
-		console.log("User Already Created")
+		res.status(409).send({ msg: 'An account is already associated with this email' });
 	} else {
 		const user = await mongoDB.createUser(req.body.email, req.body.password);
 
