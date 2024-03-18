@@ -31,6 +31,23 @@ app.post('/create-event', (req, res) => {
     res.send(event_list);
     });
 
+// Authentication
+app.post('/auth/create', async (req, res) => {
+	if (await getUser(req.body.email)) {
+		res.status(409).send({ msg: 'Existing User' });
+	} else {
+		const user = await createUser(req.body.email, req.body.password);
+		res.send({
+			id: user._id,
+		})
+	}
+});
+
+
+app.post('/auth/login', async (req, res) => {
+	res.send({ id: 'user@id.com'})
+});
+
 //Frontend served up using Express static middleware
 
 // Return application default page if the path is unknown
