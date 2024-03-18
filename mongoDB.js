@@ -14,7 +14,7 @@ async function connect_to_EventHub() {
     client
         .connect()
         .then(() => db.command({ ping: 1 }))
-        .then(() => console.log(`Connected to Database`))
+        .then(() => console.log(`Connected to Event Database`))
         .catch((ex) => {
           console.log(`Error with ${url} because ${ex.message}`);
           process.exit(1);
@@ -33,7 +33,7 @@ async function connect_to_UserInformation() {
     client
         .connect()
         .then(() => db.command({ ping: 1 }))
-        .then(() => console.log(`Connected to Database`))
+        .then(() => console.log(`Connected to User Database`))
         .catch((ex) => {
           console.log(`Error with ${url} because ${ex.message}`);
           process.exit(1);
@@ -59,13 +59,13 @@ async function pullEvents() {
 
 // Authetication
 
-function getUser(email) {
-    const userCollection = connect_to_UserInformation();
-    return collection.findOne({email:email});
+async function getUser(email) {
+    const userCollection = await connect_to_UserInformation();
+    return userCollection.findOne({email:email});
 }
 
 async function createUser(email, password) {
-    const userCollection = connect_to_UserInformation();
+    const userCollection = await connect_to_UserInformation();
 
     const passwordHash = await bcrypt.hash(password, 10);
 
@@ -76,9 +76,13 @@ async function createUser(email, password) {
     }
     
     await userCollection.insertOne(user);
+
+    return user;
 }
 
 module.exports = {
     createEvent,
-    pullEvents
+    pullEvents,
+    getUser,
+    createUser
 };

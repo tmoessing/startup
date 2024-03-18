@@ -1,4 +1,8 @@
 const mongoDB = require('./mongoDB.js');
+const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
+
+
 
 // Create an HTTP service using Node.js and Express
 const express = require('express');
@@ -6,6 +10,8 @@ const app = express();
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
+
+app.use(cookieParser());
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -33,19 +39,48 @@ app.post('/create-event', (req, res) => {
 
 // Authentication
 app.post('/auth/create', async (req, res) => {
-	if (await getUser(req.body.email)) {
+	if (await mongoDB.getUser(req.body.email)) {
 		res.status(409).send({ msg: 'Existing User' });
+		console.log("User Already Created")
 	} else {
-		const user = await createUser(req.body.email, req.body.password);
+		const user = await mongoDB.createUser(req.body.email, req.body.password);
+
+		setAuthCookie(res, user.token);
+
 		res.send({
 			id: user._id,
-		})
+		});
 	}
 });
 
-
 app.post('/auth/login', async (req, res) => {
-	res.send({ id: 'user@id.com'})
+	const user = await mongoDB.getUser(req.body.email);
+	if (user) {
+		if (await bcrypt.compare(req.body.password, user.password)) {
+			setAuthCookie(res, user.token);
+			res.send({id:user._id});
+			return;
+		}
+	}
+	res.status(401).send({msg: 'Unauthorized'});
+});
+
+function setAuthCookie(res, authToken) {
+	res.cookie('token', authToken, {
+		secure: true,
+		httpOnly: true,
+		sameSite: 'strict',
+	});
+}
+
+app.get('/user/me', async (req, res) => {
+	authToken = req.cookies['token'];
+	const user = await mongoDB.connect_to_UserInformation().findOne({token: authToken});
+	if (user) {
+		res.send({ email: user.email });
+		return;
+	}
+	res.status(401).send({msg: 'Unauthorized'})
 });
 
 //Frontend served up using Express static middleware
