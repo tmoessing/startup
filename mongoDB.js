@@ -50,11 +50,17 @@ async function createEvent(event) {
 
 async function pullEvents() {
     const eventCollection = await connect_to_EventHub();
-    
     const cursor = eventCollection.find();
-    const events = await cursor.toArray();
 
-    return events;
+    const event_list = await cursor.toArray();
+
+    await removeOldEvents(event_list);
+
+    const new_cursor = eventCollection.find();
+    const new_events = await new_cursor.toArray();
+    
+
+    return new_events;
 }
 
 // Authetication
@@ -86,3 +92,71 @@ module.exports = {
     getUser,
     createUser
 };
+
+
+// Clean up Events
+async function removeOldEvents(event_list) {
+	let currentDate = new Date();
+	let currentYear = currentDate.getFullYear();
+	let currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so we add 1
+	let currentDay = String(currentDate.getDate()).padStart(2, '0');
+
+	let currentTime = new Date();
+	let currentHour = currentTime.getHours();
+	let currentMinute = currentTime.getMinutes();
+
+    let events_to_remove = []
+
+	// Look at each event
+	for (let event of event_list) {
+		let [eventYear, eventMonth, eventDay] = event["Date"].split('-').map(Number);
+		let [eventHour, eventMinute] = event["Time"].split(":").map(Number);
+
+		if (currentYear < eventYear) {
+			continue;
+		} else if (currentYear > eventYear) {
+            events_to_remove.push(event)
+		} else {
+			// currentYear is equal to eventYear, check month
+			if (currentMonth < eventMonth) {
+				continue;
+			} else if (currentMonth > eventMonth) {
+				// event has already occurred this month
+                events_to_remove.push(event)
+			} else {
+				// currentMonth is equal to eventMonth, check day
+				if (currentDay < eventDay) {
+					continue;
+				} else if (currentDay > eventDay) {
+					// event has already occurred today
+                    events_to_remove.push(event)
+				} else {
+					// currentDay is equal to eventDay, check hour
+					if (currentHour < eventHour) {
+						continue;
+					} else if (currentHour > eventHour) {
+						// event has already occurred this hour
+                        events_to_remove.push(event)
+					} else {
+						// currentHour is equal to eventHour, check minute
+						if (currentMinute < eventMinute) {
+							continue;
+						} else if (currentMinute > eventMinute) {
+							// event has already occurred this minute
+                            events_to_remove.push(event)
+						} else {
+							// The event is happening right now!
+						}
+					}
+				}
+			}
+		}
+	}
+
+    delete_events(events_to_remove);
+}
+
+async function delete_events(events_to_remove) {
+    let eventCollection = await connect_to_EventHub();
+    await eventCollection.deleteMany({ _id: { $in: events_to_remove.map(event => event._id) } }    );
+}
