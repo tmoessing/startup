@@ -32,9 +32,9 @@ app.get('/pull-events', async (req, res) => {
 
 // Create Event
 app.post('/create-event', (req, res) => {
-    updateEventList(req.body, event_list);
+    updateEventList(req.body);
 
-    res.send(event_list);
+    res.send(200);
     });
 
 // Authentication
@@ -94,8 +94,7 @@ app.listen(port, () => {
   });
 
 // Update Events
-function updateEventList(event, event_list) {
-    // event_list.push(event);
+function updateEventList(event) {
 	mongoDB.createEvent(event);
 
 }
