@@ -23,9 +23,10 @@ app.use(express.static('public'));
 // Your backend provides service endpoints
 
 // Get Events
-app.get('/pull-events', (req, res) => {
+app.get('/pull-events', async (req, res) => {
     // Get rid of old events
-    removeOldEvents()
+    // removeOldEvents()
+	let event_list = await mongoDB.pullEvents();
 
     res.send(event_list);
 });

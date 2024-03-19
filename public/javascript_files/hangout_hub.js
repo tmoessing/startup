@@ -16,10 +16,15 @@ function loadTable(data) {
     }
   }
   
+
+const headersToShow = ['Activity', 'Date', 'Time', "Location"]
+
 function parseHeader(data) {
     let headers = [];
     for (const [key, value] of Object.entries(data[0])) {
-      headers.push({ name: key, type: typeof value });
+      if (headersToShow.includes(key)) {
+        headers.push({ name: key, type: typeof value });
+      }
     }
     return headers;
   }
@@ -50,16 +55,16 @@ function generateRows(data, tableElement) {
     data.forEach((dataRow) => {
       const rowElement = document.createElement("tr");
       tableElement.appendChild(rowElement);
-      for (const [, value] of Object.entries(dataRow)) {
+
+      headersToShow.forEach(header => {
         const cellElement = document.createElement("td");
         rowElement.appendChild(cellElement);
-        const textNode = document.createTextNode(value);
+        const textNode = document.createTextNode(dataRow[header]);
         cellElement.appendChild(textNode);
-      }
+      });
     });
   }
 
-  
 function insertRule(rule) {
     var sheet = window.document.styleSheets[0];
     sheet.insertRule(rule, sheet.cssRules.length);
@@ -71,7 +76,7 @@ function sortColumn(column) {
     const sortedData = currentData.sort(
     	(a, b) => sortDirection * (a[sortBy] > b[sortBy] ? 1 : -1)
     );
-    table(sortedData);
+    loadTable(sortedData);
   }
   
 function removeAllChildNodes(parent) {

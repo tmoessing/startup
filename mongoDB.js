@@ -54,7 +54,7 @@ async function pullEvents() {
     const cursor = eventCollection.find();
     const events = await cursor.toArray();
 
-    console.log(events);
+    return events;
 }
 
 // Authetication
