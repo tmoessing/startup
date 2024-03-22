@@ -88,15 +88,14 @@ secureApiRouter.use(async (req, res, next) => {
 // Get Events
 secureApiRouter.get('/pull-events', async (req, res) => {
 	let event_list = await DB.pullEvents();
-
-    res.send(event_list);
+  res.send(event_list);
 });
 
 // Create Event
 secureApiRouter.post('/create-event', (req, res) => {
-    updateEventList(req.body);
+  updateEventList(req.body);
 
-    res.send(200);
+  res.send(200);
     });
 
 // Default error handler
