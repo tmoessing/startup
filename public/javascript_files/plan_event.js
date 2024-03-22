@@ -90,8 +90,6 @@ function newEvent() {
 
     serverCreateEvent(EventObject)
     
-    window.location.href = "hangout_hub.html";
-    
 }
 
 function createEventObject(event_activity, event_date, event_time, event_location) {
@@ -121,33 +119,19 @@ function storeEvent() {
 }
 
 async function serverCreateEvent(EventObject) {
-    try {
-        const response = await fetch('/create-event', {
+    const response = await fetch('/api/create-event', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(EventObject),
         });
-    } catch {
-        console.log("Error creating event");
+
+    if (response.ok) {
+        window.location.href = "hangout_hub.html";
+    } else {
+        if (response.status == 401) {
+            alert(`⚠ Unauthorized to make an event. Please Log in or Create an Account`)
+            window.location.href = "log_in.html";
+        }
     }
 }
-
-// async function check_userlogin(EventObject) {
-    
-//     const response = await fetch('/user/me', {
-//             method: 'POST',
-//             headers: {'content-type': 'application/json'},
-//         });
-    
-//     if (response.ok) {
-
-//     } else {
-//         const body = await response.json()
-//         alert(`⚠ Unauthorized to make an event. Please Log in or Create Event`)
-//         window.location.href = "log_in.html";
-//     }
-// }
-
-
-// check_userlogin()
 
