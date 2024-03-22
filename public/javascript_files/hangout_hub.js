@@ -101,19 +101,23 @@ function removeAllChildNodes(parent) {
 
 async function loadEvents() {
   let events = [];
-  try {
-    // Request List of Event Objects
-    const response = await fetch('/pull-events');
+  
+  // Request List of Event Objects
+  const response = await fetch('/api/pull-events');
+
+  console.log(response)
+
+  if (response.ok) {
     events = await response.json();
-
-  } catch {
-    console.log("Trouble in River City: Couldn't connect to Backend");
+    console.log(events)
+    loadTable(events);
+  } else {
+    if (response.status == 401) {
+      alert(`⚠ Unauthorized to view events. Please Log in or Create an Account`)
+      window.location.href = "log_in.html";
   }
-  loadTable(events);
-
 }
-
-// displayWeather();
+}
 
 loadEvents();
 
