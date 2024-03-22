@@ -12,14 +12,15 @@ function logIn () {
 
 
 async function db_user_login(users_creditnals) {
-    const response = await fetch('/auth/login', {
+    console.log("HERE")
+    const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(users_creditnals),
     });
 
     if (response.ok) {
-        window.location.href = "plan_event.html";
+        // window.location.href = "plan_event.html";
 
     } else {
         const body = await response.json()
