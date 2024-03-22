@@ -106,7 +106,7 @@ For this deliverable I built out the structure of my application using HTML.
 
 - **Use MongoDB to store credentials** - Stores User Data
 
-- **Restricts functionality** - 
+- **Restricts functionality** - Users not logged in won't be able to look at events. If they attempt to create an event they will be asked to Login or Create an Account
 
 
 ### WebSocket Deliverable
