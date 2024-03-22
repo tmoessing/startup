@@ -131,3 +131,23 @@ async function serverCreateEvent(EventObject) {
         console.log("Error creating event");
     }
 }
+
+// async function check_userlogin(EventObject) {
+    
+//     const response = await fetch('/user/me', {
+//             method: 'POST',
+//             headers: {'content-type': 'application/json'},
+//         });
+    
+//     if (response.ok) {
+
+//     } else {
+//         const body = await response.json()
+//         alert(`⚠ Unauthorized to make an event. Please Log in or Create Event`)
+//         window.location.href = "log_in.html";
+//     }
+// }
+
+
+// check_userlogin()
+

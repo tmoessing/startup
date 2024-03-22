@@ -1,5 +1,12 @@
-function logOut() {
-    localStorage.setItem("currentUser", "");
+async function logOut() {
+    const response = await fetch('/api/auth/logout', {
+            method: 'DELETE',
+            headers: {'content-type': 'application/json'},
+    });
 
-    window.location.href = "../index.html"
+    if (response.ok) {
+        window.location.href = "../index.html"
+    } 
+    
+    
 }

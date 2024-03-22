@@ -27,7 +27,7 @@ function register() {
 
     let UserObject = createUserDataObject(fname, lname, email, password);
     
-    DB_Create_User(UserObject);
+    DB_create_User(UserObject);
 
 }
 
@@ -84,8 +84,8 @@ function createUserDataObject(fname, lname, email, password) {
     return UserDataObject;
 }
 
-async function DB_Create_User(UserObject) {
-    const response = await fetch('/auth/create', {
+async function DB_create_User(UserObject) {
+    const response = await fetch('/api/auth/create', {
         method: 'POST',
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(UserObject),

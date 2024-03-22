@@ -12,7 +12,6 @@ function logIn () {
 
 
 async function db_user_login(users_creditnals) {
-    console.log("HERE")
     const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
@@ -20,7 +19,7 @@ async function db_user_login(users_creditnals) {
     });
 
     if (response.ok) {
-        // window.location.href = "plan_event.html";
+        window.location.href = "plan_event.html";
 
     } else {
         const body = await response.json()

@@ -31,7 +31,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 	if (await DB.getUser(req.body.email)) {
 		res.status(409).send({ msg: 'An account is already associated with this email' });
 	} else {
-		const user = await dB.createUser(req.body.email, req.body.password);
+		const user = await DB.createUser(req.body.email, req.body.password);
 
 		setAuthCookie(res, user.token);
 
