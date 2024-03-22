@@ -7,6 +7,4 @@ async function logOut() {
     if (response.ok) {
         window.location.href = "../index.html"
     } 
-    
-    
 }
