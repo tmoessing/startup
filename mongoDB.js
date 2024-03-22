@@ -4,6 +4,11 @@ const uuid = require('uuid');
 
 const cfg = require('./dbCongfig.json');
 
+async function getUserByToken(token) {
+    const userCollection = await connect_to_UserInformation();
+    return userCollection.findOne({ token: token });
+  }
+
 async function connect_to_EventHub() {
     const url = `mongodb+srv://${cfg.userName}:${cfg.password}@${cfg.hostname}`;
     const client = new MongoClient(url);
@@ -90,7 +95,8 @@ module.exports = {
     createEvent,
     pullEvents,
     getUser,
-    createUser
+    createUser, 
+    getUserByToken
 };
 
 
