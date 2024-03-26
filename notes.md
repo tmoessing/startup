@@ -1480,3 +1480,192 @@ app.get('/user/me', async (req, res) => {
   res.status(401).send({ msg: 'Unauthorized' });
 });
 ```
+
+## PM2
+When you run a program from the console, the program will automatically terminate when you close the console or if the computer restarts. In order to keep programs running after a shutdown you need to register it as a daemon. The term daemon comes from the idea of something that is always there working in the background. Hopefully you only have good daemons running in your background.
+
+We want our web services to continue running as a daemon. We would also like an easy way to start and stop our services. That is what Process Manager 2 (PM2) does.
+
+PM2 is already installed on your production server as part of the AWS AMI that you selected when you launched your server. Additionally, the deployment scripts found with the Simon projects automatically modify PM2 to register and restart your web services. That means you should not need to do anything with PM2. However, if you run into problems such as your services not running, then here are some commands that you might find useful.
+
+- pm2 ls	List all of the hosted node processes
+
+- pm2 monit	Visual monitor
+
+- pm2 start index.js -n simon	Add a new process with an explicit name
+
+- pm2 start index.js -n startup -- 4000	Add a new process with an explicit name and port parameter
+
+- pm2 stop simon	Stop a process
+
+- pm2 restart simon	Restart a process
+
+- pm2 delete simon	Delete a process from being hosted
+
+- pm2 delete all	Delete all processes
+
+- pm2 save	Save the current processes across reboot
+
+- pm2 restart all	Reload all of the processes
+
+- pm2 restart simon --update-env	Reload process and update the node version to the current environment definition
+
+- pm2 update	Reload pm2
+
+- pm2 start env.js --watch --ignore-watch="node_modules"	Automatically reload service when index.js changes
+
+- pm2 describe simon	Describe detailed process information
+
+- pm2 startup	Displays the command to run to keep PM2 running after a reboot.
+
+- pm2 logs simon	Display process logs
+
+- pm2 env 0	Display environment variables for process. Use pm2 ls to get the process ID
+
+
+## Playwright
+
+As a demonstration of using Playwright, consider the following simplified HTML file containing a button that changes the paragraph text. The button calls a JavaScript function defined in a script element located in the HTML file.
+
+```
+<body>
+  <p id="welcome" data-testid="msg">Hello world</p>
+  <button onclick="changeWelcome()">change welcome</button>
+  <script>
+    function changeWelcome() {
+      const welcomeEl = document.querySelector('#welcome');
+      welcomeEl.textContent = 'I feel welcomed';
+    }
+  </script>
+</body>
+```
+
+You can now write your first Playwright test. Take the following and paste it over the tests/example.spec.js file that the Playwright install created.
+
+```
+import { test, expect } from '@playwright/test';
+
+test('testWelcomeButton', async ({ page }) => {
+  // Navigate to the welcome page
+  await page.goto('http://localhost:5500/');
+
+  // Get the target element and make sure it is in the correct starting state
+  const hello = page.getByTestId('msg');
+  await expect(hello).toHaveText('Hello world');
+
+  // Press the button
+  const changeBtn = page.getByRole('button', { name: 'change welcome' });
+  await changeBtn.click();
+
+  // Expect that the change happened correctly
+  await expect(hello).toHaveText('I feel not welcomed');
+});
+```
+
+This test makes sure you can successfully navigate to the desired page, that the page contains the desired elements, that you can press the button and the text changes as expected.
+
+Before you run the test, you actually need your application running for the test to execute against. You can do this by using the VS Code Live Server extension, or if you are testing a Node.js based service then run npm run start. You can actually add configuration to your tests so that your application is started when your tests run, but for now, just start up your application before you run the test.
+
+To run the test in VS Code, select the Test Explorer tab. You should see your test listed in the explorer. Select the example.spec.ts test and press the play button. This will start the test, launch a browser, run the test code to interact with the browser, and display the result. In this case our test fails because it is expecting the resulting text to be I feel not welcomed when it actually displays I feel welcomed.
+
+The following image should be similar to what you see. You can see the listing of tests on the left and the JavaScript based test in the editor window on the right. When a test fails, the editor window displays a clear description of what went wrong. You can even debug the tests as they execute just like you would any other Node.js based JavaScript execution.
+
+
+With the ability to run automated UI tests, we now turn our attention to testing on the multitude of various devices. There are several services out there that help with this. One of these is BrowserStack. BrowserStack lets you pick from a long list of physical devices that you can run interactively, or use when driving automated tests with Selenium. The image below only shows a partial list of iPhone devices. BrowserStack also has devices for Android, Mac, and Windows.
+
+## Endpoint Testing
+
+```
+mkdir testJest
+cd testJest
+npm init -y
+npm install express
+code .
+```
+
+```
+const app = express();
+
+app.use(express.json());
+
+// Endpoints
+app.get('/store/:storeName', (req, res) => {
+  res.send({ name: req.params.storeName });
+});
+
+app.put('/store/:storeName', (req, res) => {
+  req.body.updated = true;
+  res.send(req.body);
+});
+
+module.exports = app;
+```
+
+In order to allow Jest to start up the HTTP server when running tests, we initialize the application a little bit differently than we have in the past. Normally, we would have just started listening on the Express app object after we defined our endpoints. Instead we export the Express app object from our server.js file and then import the app object in the index.js file that is used to run our servic
+
+```
+const app = require('./server');
+
+const port = 8080;
+app.listen(port, function () {
+  console.log(`Listening on port ${port}`);
+});
+```
+
+To test our endpoints we need another package so that we can make HTTP requests without having to actually send them over the network. This is done with the NPM package called supertest. Go ahead and install this now.
+
+To make an HTTP request you pass the Express app to the supertest request function and then chain on the HTTP verb function that you want to call, along with the endpoint path. You can then chain on as many expect functions as you would like. In the following example we will expect an HTTP status code of 200 (OK), and that the body of the response contains the object that we expect the endpoint to return.
+
+If something goes wrong, the end function will contain an error and we pass the error along to the done function. Otherwise we just call done without the error.
+
+```
+const request = require('supertest');
+const app = require('./server');
+
+test('getStore returns the desired store', (done) => {
+  request(app)
+    .get('/store/provo')
+    .expect(200)
+    .expect({ name: 'provo' })
+    .end((err) => (err ? done(err) : done()));
+});
+```
+
+## Web Socket
+
+HTTP is based on a client-server architecture. A client always initiates the request and the server responds. This is great if you are building a global document library connected by hyperlinks, but for many other use cases it just doesn't work. Applications for notifications, distributed task processing, peer-to-peer communication, or asynchronous events need communication that is initiated by two or more connected devices.
+
+For years, web developers created hacks to work around the limitation of the client/server model. This included solutions like having the client frequently pinging the server to see if the server had anything to say, or keeping client-initiated connections open for a very long time as the client waited for some event to happen on the server. Needless to say, none of these solutions were elegant or efficient.
+
+Finally, in 2011 the communication protocol WebSocket was created to solve this problem. The core feature of WebSocket is that it is fully duplexed. This means that after the initial connection is made from a client, using vanilla HTTP, and then upgraded by the server to a WebSocket connection, the relationship changes to a peer-to-peer connection where either party can efficiently send data at any time.
+
+JavaScript running on a browser can initiate a WebSocket connection with the browser's WebSocket API. First you create a WebSocket object by specifying the port you want to communicate on.
+
+You can then send messages with the send function, and register a callback using the onmessage function to receive messages.
+
+```
+const socket = new WebSocket('ws://localhost:9900');
+
+socket.onmessage = (event) => {
+  console.log('received: ', event.data);
+};
+
+socket.send('I am listening');
+```
+
+```
+const { WebSocketServer } = require('ws');
+
+const wss = new WebSocketServer({ port: 9900 });
+
+wss.on('connection', (ws) => {
+  ws.on('message', (data) => {
+    const msg = String.fromCharCode(...data);
+    console.log('received: %s', msg);
+
+    ws.send(`I heard you say "${msg}"`);
+  });
+
+  ws.send('Hello webSocket');
+});
+```
