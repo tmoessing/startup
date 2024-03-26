@@ -1,33 +1,36 @@
 // Simulate Message Notifications
-setInterval(() => {
-    const randomTime = getRandomTime();
-    const notificationContainer  = document.querySelector('.notification-section');
+// setInterval(() => {
+//     const randomTime = getRandomTime();
+//     const notificationContainer  = document.querySelector('.notification-section');
 
-    const newNotification = document.createElement('aside');
-    newNotification.className = '.notification';
-    newNotification.innerHTML = `<p><span class="user">Caden</span> planned Basketball at ${randomTime}</p>`;
-    notificationContainer.appendChild(newNotification);
+//     const newNotification = document.createElement('aside');
+//     newNotification.className = '.notification';
+//     newNotification.innerHTML = `<p><span class="user">Caden</span> planned Basketball at ${randomTime}</p>`;
+//     notificationContainer.appendChild(newNotification);
 
-    if (notificationContainer.children.length > 4) {
-        notificationContainer.removeChild(notificationContainer.children[0])
-    }
+//     if (notificationContainer.children.length > 4) {
+//         notificationContainer.removeChild(notificationContainer.children[0])
+//     }
 
-    notificationContainer.style.display = 'block';
+//     notificationContainer.style.display = 'block';
 
-  }, 5000);
+//   }, 5000);
 
 
-function getRandomTime() {
-    const hours = Math.floor(Math.random() * 24);
-    const minutes = Math.floor(Math.random() * 60);
+// function getRandomTime() {
+//     const hours = Math.floor(Math.random() * 24);
+//     const minutes = Math.floor(Math.random() * 60);
 
-    // Ensure leading zeros for single-digit hours/minutes
-    const formattedHours = hours < 10 ? '0' + hours : hours;
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+//     // Ensure leading zeros for single-digit hours/minutes
+//     const formattedHours = hours < 10 ? '0' + hours : hours;
+//     const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
 
-    return `${formattedHours}:${formattedMinutes}`;
+//     return `${formattedHours}:${formattedMinutes}`;
+// }
+
+function getPlayerName() {
+    return localStorage.getItem('userName') ?? 'Mystery player';
 }
-
 
 // Set limits for input boxes
 let currentDate = new Date();
@@ -88,6 +91,8 @@ function newEvent() {
 
     let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
 
+
+
     serverCreateEvent(EventObject)
     
 }
@@ -126,6 +131,7 @@ async function serverCreateEvent(EventObject) {
         });
 
     if (response.ok) {
+        broadcastEvent(getPlayerName(), EventCreatedEvent, EventObject.Activity)
         window.location.href = "hangout_hub.html";
     } else {
         if (response.status == 401) {
@@ -135,3 +141,46 @@ async function serverCreateEvent(EventObject) {
     }
 }
 
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    // socket.onopen = (event) => {
+    //   displayMsg('system', 'game', 'connected');
+    // };
+    // socket.onclose = (event) => {
+    //   displayMsg('system', 'game', 'disconnected');
+    // };
+    socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      if (msg.type === EventCreatedEvent) {
+        displayMsg('user', msg.user, `${msg.activity}`);
+      } 
+    //   else if (msg.type === GameStartEvent) {
+    //     // this.displayMsg(getPlayerName(), msg.user, `started a new game`);
+    //   }
+    };
+}
+
+function displayMsg(cls, from, msg) {
+    const notificationContainer  = document.querySelector('.notification-section');
+
+    const newNotification = document.createElement('aside');
+    newNotification.className = '.notification';
+    newNotification.innerHTML = `<p><span class="user">${user}</span> planned ${event}</p>`;
+    notificationContainer.appendChild(newNotification);
+
+    if (notificationContainer.children.length > 4) {
+        notificationContainer.removeChild(notificationContainer.children[0])
+    }
+
+    notificationContainer.style.display = 'block';
+};
+
+function broadcastEvent(from, type, value) {
+    const event = {
+      user: user,
+      type: type,
+      activity: activity,
+    };
+    socket.send(JSON.stringify(event));
+};

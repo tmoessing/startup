@@ -2,8 +2,9 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
-
 const DB = require('./mongoDB.js');
+
+const { peerProxy } = require('./peerProxy.js');
 
 const authCookieName = 'token';
 
@@ -126,3 +127,9 @@ function updateEventList(event) {
 	DB.createEvent(event);
 
 }
+
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+peerProxy(httpService)
