@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 
-const cfg = require('./dbCongfig.json');
+const cfg = require('./dbConfig.json');
 
 async function getUserByToken(token) {
     const userCollection = await connect_to_UserInformation();
