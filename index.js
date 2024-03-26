@@ -9,7 +9,7 @@ const { peerProxy } = require('./peerProxy.js');
 const authCookieName = 'token';
 
 // The service port may be set on the command line
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -32,7 +32,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 	if (await DB.getUser(req.body.email)) {
 		res.status(409).send({ msg: 'An account is already associated with this email' });
 	} else {
-		const user = await DB.createUser(req.body.email, req.body.password);
+		const user = await DB.createUser(req.body.username, req.body.email, req.body.password);
 
 		setAuthCookie(res, user.token);
 
@@ -117,10 +117,6 @@ function setAuthCookie(res, authToken) {
     sameSite: 'strict',
   });
 }
-
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
 
 // Update Events
 function updateEventList(event) {
