@@ -1,32 +1,4 @@
-// Simulate Message Notifications
-// setInterval(() => {
-//     const randomTime = getRandomTime();
-//     const notificationContainer  = document.querySelector('.notification-section');
 
-//     const newNotification = document.createElement('aside');
-//     newNotification.className = '.notification';
-//     newNotification.innerHTML = `<p><span class="user">Caden</span> planned Basketball at ${randomTime}</p>`;
-//     notificationContainer.appendChild(newNotification);
-
-//     if (notificationContainer.children.length > 4) {
-//         notificationContainer.removeChild(notificationContainer.children[0])
-//     }
-
-//     notificationContainer.style.display = 'block';
-
-//   }, 5000);
-
-
-// function getRandomTime() {
-//     const hours = Math.floor(Math.random() * 24);
-//     const minutes = Math.floor(Math.random() * 60);
-
-//     // Ensure leading zeros for single-digit hours/minutes
-//     const formattedHours = hours < 10 ? '0' + hours : hours;
-//     const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-
-//     return `${formattedHours}:${formattedMinutes}`;
-// }
 
 function getPlayerName() {
     return localStorage.getItem('userName') ?? 'Mystery player';
