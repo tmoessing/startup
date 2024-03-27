@@ -75,12 +75,13 @@ async function getUser(email) {
     return userCollection.findOne({email:email});
 }
 
-async function createUser(email, password) {
+async function createUser(username, email, password) {
     const userCollection = await connect_to_UserInformation();
 
     const passwordHash = await bcrypt.hash(password, 10);
 
     const user = {
+        username: username,
         email:email,
         password: passwordHash,
         token: uuid.v4(),
