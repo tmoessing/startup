@@ -5,6 +5,7 @@ async function logOut() {
     });
 
     if (response.ok) {
+        localStorage.removeItem('userName');
         window.location.href = "../index.html"
     } 
 }
