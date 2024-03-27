@@ -22,8 +22,6 @@ if (document.getElementById("date").value === currentDate) {
     alert("Please don't schedule a time that has already happened")
 }
 
-
-
 function newEvent() {
     let event_activity = document.getElementById("activity").value;
     let event_date = document.getElementById("date").value;
@@ -133,7 +131,7 @@ function configureWebSocket() {
     };
 }
 
-function displayMsg(cls, from, msg) {
+function displayMsg(cls, user, event) {
     const notificationContainer  = document.querySelector('.notification-section');
 
     const newNotification = document.createElement('aside');
@@ -148,7 +146,7 @@ function displayMsg(cls, from, msg) {
     notificationContainer.style.display = 'block';
 };
 
-function broadcastEvent(from, type, value) {
+function broadcastEvent(user, type, activity) {
     const event = {
       user: user,
       type: type,
