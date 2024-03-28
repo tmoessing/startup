@@ -110,4 +110,13 @@ For this deliverable I built out the structure of my application using HTML.
 
 
 ### WebSocket Deliverable
+
+- Backend listens for WebSocket connection - done!
+
+- Frontend makes WebSocket connection - done!
+
+- Data sent over WebSocket connection - done!
+
+- WebSocket data displayed - If a user is on the plan event page and a diffrent users are planning events and clicking create they will get a live time notification!
+
 ### React Deliverable
