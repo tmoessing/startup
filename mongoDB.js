@@ -19,7 +19,7 @@ async function connect_to_EventHub() {
     client
         .connect()
         .then(() => db.command({ ping: 1 }))
-        .then(() => console.log(`Connected to Event Database`))
+        // .then(() => console.log(`Connected to Event Database`))
         .catch((ex) => {
           console.log(`Error with ${url} because ${ex.message}`);
           process.exit(1);
@@ -38,7 +38,7 @@ async function connect_to_UserInformation() {
     client
         .connect()
         .then(() => db.command({ ping: 1 }))
-        .then(() => console.log(`Connected to User Database`))
+        // .then(() => console.log(`Connected to User Database`))
         .catch((ex) => {
           console.log(`Error with ${url} because ${ex.message}`);
           process.exit(1);
