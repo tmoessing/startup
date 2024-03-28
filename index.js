@@ -106,7 +106,7 @@ secureApiRouter.get('/pull-events', async (req, res) => {
 secureApiRouter.post('/create-event', (req, res) => {
   updateEventList(req.body);
 
-  res.send(200);
+  res.sendStatus(200);
     });
 
 // Default error handler
