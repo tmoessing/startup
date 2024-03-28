@@ -1,4 +1,4 @@
-
+const EventCreatedEvent = "eventCreate";
 
 function getPlayerName() {
     return localStorage.getItem('userName') ?? 'Mystery player';
@@ -154,3 +154,5 @@ function broadcastEvent(user, type, activity) {
     };
     socket.send(JSON.stringify(event));
 };
+
+configureWebSocket();
