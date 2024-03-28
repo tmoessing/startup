@@ -2,14 +2,13 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
-const DB = require('./mongoDB.js');
 
-const { peerProxy } = require('./peerProxy.js');
+const DB = require('./mongoDB.js');
 
 const authCookieName = 'token';
 
 // The service port may be set on the command line
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -32,7 +31,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 	if (await DB.getUser(req.body.email)) {
 		res.status(409).send({ msg: 'An account is already associated with this email' });
 	} else {
-		const user = await DB.createUser(req.body.username, req.body.email, req.body.password);
+		const user = await DB.createUser(req.body.email, req.body.password);
 
 		setAuthCookie(res, user.token);
 
@@ -61,22 +60,12 @@ apiRouter.delete('/auth/logout', (_req, res) => {
   res.status(204).end();
 });
 
-// // GetUser returns information about a user
-// apiRouter.get('/user/:email', async (req, res) => {
-//   const user = await DB.getUser(req.params.email);
-//   if (user) {
-//     const token = req?.cookies.token;
-//     res.send({ email: user.email, authenticated: token === user.token });
-//     return;
-//   }
-//   res.status(404).send({ msg: 'Unknown' });
-// });
-
 // GetUser returns information about a user
 apiRouter.get('/user/:email', async (req, res) => {
   const user = await DB.getUser(req.params.email);
   if (user) {
-    res.send(user);
+    const token = req?.cookies.token;
+    res.send({ email: user.email, authenticated: token === user.token });
     return;
   }
   res.status(404).send({ msg: 'Unknown' });
@@ -128,14 +117,12 @@ function setAuthCookie(res, authToken) {
   });
 }
 
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
 // Update Events
 function updateEventList(event) {
 	DB.createEvent(event);
 
 }
-
-const httpService = app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
-
-peerProxy(httpService)

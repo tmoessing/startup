@@ -1,0 +1,17 @@
+/* Main Body */
+main {
+    padding-top: 10vh;
+    padding-bottom: 30vh;
+}
+
+/* Register Box*/
+.register {
+    padding: 5vh;
+    background-color: yellow;
+    text-align: center; /* Center the content horizontally */
+    border-radius: 30px;
+}
+
+.form-floating {
+    margin-bottom: 5px;
+}
