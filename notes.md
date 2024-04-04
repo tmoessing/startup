@@ -1899,4 +1899,150 @@ const hello = <div>Hello</div>;
 ReactDOM.render(hello, document.getElementById('root'));
 ```
 
+## Toolchains
 
+- Code repository - Stores code in a shared, versioned, location.
+
+- Linter - Removes, or warns, of non-idiomatic code usage.
+
+- Prettier - Formats code according to a shared standard.
+
+- Transpiler - Compiles code into a different format. For example, from JSX to JavaScript, TypeScript to JavaScript, or SCSS to CSS.
+
+- Polyfill - Generates backward compatible code for supporting old browser versions that do not support the latest standards.
+
+- Bundler - Packages code into bundles for delivery to the browser. This enables compatibility (for example with ES6 module support), or performance (with lazy loading).
+
+- Minifier - Removes whitespace and renames variables in order to make code smaller and more efficient to deploy.
+
+- Testing - Automated tests at multiple levels to ensure correctness.
+
+- Deployment - Automated packaging and delivery of code from the development environment to the production environment.
+
+The toolchain that we use for our React project consists of GitHub as the code repository, Vite for JSX, TS, development and debugging support, ESBuild for converting to ES6 modules and transpiling (with Babel underneath), Rollup for bundling and tree shaking, PostCSS for CSS transpiling, and finally a simple bash script (deployReact.sh) for deployment.
+
+## Vite
+
+For our toolchain we are going to use Vite. Vite bundles your code quickly, has great debugging support, and allows you to easily support JSX, TypeScript, and different CSS flavors. To get started with Vite, let's first build a simple web application. Later we will convert Simon over to React using Vite. This will teach you what you need to know in order to move your startup to React.
+
+To create a new React-based web application using Vite, open your console and run the following commands:
+
+**./**
+
+- index.html	Primary page for the application. This is the starting point to load all of the JSX components beginning with main.jsx.
+
+- package.json	NPM definition for package dependencies and script commands. This is what maps npm run dev to actually start up Vite.
+
+- package-lock.json	Version constraints for included packages (do not edit this).
+
+- vite.config.js	Configuration setting for Vite. Specifically this sets up React for development.
+
+**./public**
+
+- vite.svg	Vite logo for use as favicon and for display in the app.
+
+**./src**
+
+- main.jsx	Entry point for code execution. This simply loads the App component found in App.jsx.
+- index.css	CSS for the entire application.
+- App.jsx	JSX for top level application component. This displays the logs and implements the click counter.
+- App.css	CSS for the top level application component.
+
+**./src/assets**
+
+- react.svg	React logo for display in the app.
+
+
+
+
+## Router
+
+A web framework router provides essential functionality for single-page applications. With a multiple-webpage application the headers, footers, navigation, and common components must be either duplicated in each HTML page, or injected before the server sends the page to the browser. With a single page application, the browser only loads one HTML page and then JavaScript is used to manipulate the DOM and give it the appearance of multiple pages. The router defines the routes a user can take through the application, and automatically manipulates the DOM to display the appropriate framework components.
+
+React does not have a standard router package, and there are many that you can choose from. We will use react-router-dom Version 6. The simplified routing functionality of React-router-dom derives from the project react-router for its core functionality. Do not confuse the two, or versions of react-router-dom before version 6, when reading tutorials and documentation.
+
+A basic implementation of the router consists of a BrowserRouter component that encapsulates the entire application and controls the routing action. The Link, or NavLink, component captures user navigation events and modifies what is rendered by the Routes component by matching up the to and path attributes.
+
+```
+// Inject the router into the application root DOM element
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  // BrowserRouter component that controls what is rendered
+  // NavLink component captures user navigation requests
+  // Routes component defines what component is routed to
+  <BrowserRouter>
+    <div className='app'>
+      <nav>
+        <NavLink to='/'>Home</Link>
+        <NavLink to='/about'>About</Link>
+        <NavLink to='/users'>Users</Link>
+      </nav>
+
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} exact />
+          <Route path='/about' element={<About />} />
+          <Route path='/users' element={<Users />} />
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
+      </main>
+    </div>
+  </BrowserRouter>
+);
+```
+
+
+## Reactivity
+
+Making the UI react to changes in user input or data, is one of the architectural foundations of React. React enables reactivity with three major pieces of a React component: props, state, and render.
+
+When a component's JSX is rendered, React parses the JSX and creates a list of any references to the component's state or prop objects. React then monitors those objects and if it detects that they have changed it will call the component's render function so that the impact of the change is visualized.
+
+The following example contains two components: a parent <Survey/> component and a child <Question/> component. The Survey has a state named color. The Question has a property named color. The Survey passes its color state to the Question as a property. This means that any change to the Survey's color will also be reflected in the Question's color. This is a powerful means for a parent to control a child's functionality.
+
+The Question component also has a state named answer. The value of answer is displayed as part of the Question's content. The user can interact with this state through HTML radio input elements. When one of the inputs is changed the Question's onChange function is called and the answer state is updated to reflect the user's choice. This automatically causes the display of the answer to be updated.
+
+Be careful about your assumptions of when state is updated. Just because you called updateState does not mean that you can access the updated state on the next line of code. The update happens asynchronously, and therefore you never really know when it is going to happen; you only know that it will eventually happen.
+
+## Hooks
+
+**useEffect hook**
+
+The useEffect hook allows you to represent lifecycle events. For example, if you want to run a function every time the component completes rendering, you could do the following.
+
+```
+function UseEffectHookDemo() {
+  React.useEffect(() => {
+    console.log('rendered');
+  });
+
+  return <div>useEffectExample</div>;
+}
+
+ReactDOM.render(<UseEffectHookDemo />, document.getElementById('root'));
+```
+
+**Hook dependencies**
+
+You can control what triggers a useEffect hook by specifying its dependencies. In the following example we have two state variables, but we only want the useEffect hook to be called when the component is initially called and when the first variable is clicked. To accomplish this you pass an array of dependencies as a second parameter to the useEffect call.
+
+```
+function UseEffectHookDemo() {
+  const [count1, updateCount1] = React.useState(0);
+  const [count2, updateCount2] = React.useState(0);
+
+  React.useEffect(() => {
+    console.log(`count1 effect triggered ${count1}`);
+  }, [count1]);
+
+  return (
+    <ol>
+      <li onClick={() => updateCount1(count1 + 1)}>Item 1 - {count1}</li>
+      <li onClick={() => updateCount2(count2 + 1)}>Item 2 - {count2}</li>
+    </ol>
+  );
+}
+```
+
+ReactDOM.render(<UseEffectHookDemo />, document.getElementById('root'));
+If you specify and empty array [] as the hook dependency then it is only called when the component is first rendered.
