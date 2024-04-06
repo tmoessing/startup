@@ -26,33 +26,33 @@ import './index.css'
 function App() {
     return (
         <>
-        <Header />
-        <BrowserRouter>
-            <div className='app'>
-                <nav className="yellow-nav-bar">
-                    <menu>
-                        <NavLink to='/'>Home</NavLink>
-                        <NavLink to='/hangout-hub'>Hangout Hub</NavLink>
-                        <NavLink to='/register'>Register</NavLink>
-                        <NavLink to='/log-in'>Log In</NavLink>
-                        <NavLink to='/'>Log Out</NavLink>
-                        <NavLink to='/plan-event'>Plan Event</NavLink>
-                    </menu>
-                </nav>
+            <Header />
+            <BrowserRouter>
+                <div className='app'>
+                    <nav className="yellow-nav-bar">
+                        <menu>
+                            <NavLink to='/'>Home</NavLink>
+                            <NavLink to='/hangout-hub'>Hangout Hub</NavLink>
+                            <NavLink to='/register'>Register</NavLink>
+                            <NavLink to='/log-in'>Log In</NavLink>
+                            <NavLink to='/'>Log Out</NavLink>
+                            <NavLink to='/plan-event'>Plan Event</NavLink>
+                        </menu>
+                    </nav>
 
-                <main>
-                    <Routes>
-                        <Route path='/' element={<Home />} exact />
-                        <Route path='/hangout-hub' element={<HangoutHub />} />
-                        <Route path='/register' element={<Register />} />
-                        <Route path='/log-in' element={<Login />} />
-                        <Route path='/plan-event' element={<PlanEvent />} />
-                        <Route path='*' element={<Navigate to='/' replace />} />
-                    </Routes>
-                </main>
-            </div>
-        </BrowserRouter>
-        <Footer />
+                    <main>
+                        <Routes>
+                            <Route path='/' element={<Home />} exact />
+                            <Route path='/hangout-hub' element={<HangoutHub />} />
+                            <Route path='/register' element={<Register />} />
+                            <Route path='/log-in' element={<Login />} />
+                            <Route path='/plan-event' element={<PlanEvent />} />
+                            <Route path='*' element={<Navigate to='/' replace />} />
+                        </Routes>
+                    </main>
+                </div>
+            </BrowserRouter>
+            <Footer />
         </>
     )
 }
