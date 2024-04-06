@@ -1,26 +1,58 @@
 import React from 'react';
 
+import {
+    BrowserRouter,
+    NavLink,
+    Routes,
+    Navigate,
+    Route
+} from 'react-router-dom';
+
+
+// Components
 import Header from './header/header.jsx'
 import Footer from './footer/footer.jsx'
 
-import './index.css'
+import Home from './home/home.jsx'
+import HangoutHub from './hangout_hub/hangout_hub.jsx'
+import Register from './register/register.jsx'
+import Login from './login/login.jsx'
+import PlanEvent from './plan_event/plan_event.jsx'
+
+// CSS Styling
 import './main.css'
+import './index.css'
 
 function App() {
     return (
         <>
-            <Header />
-            <nav class="yellow-nav-bar">
-                <menu>
-                    <a href="html_files/hangout_hub.html">Hang Out Hub</a>
-                    <a href="html_files/register.html">Register</a>
-                    <a href="html_files/log_in.html">Log In</a>
-                    <a href="..\index.html">Log Out</a>
-                    <a href="html_files/plan_event.html">Plan Event</a>
-                </menu>
-            </nav>
+        <Header />
+        <BrowserRouter>
+            <div className='app'>
+                <nav className="yellow-nav-bar">
+                    <menu>
+                        <NavLink to='/'>Home</NavLink>
+                        <NavLink to='/hangout-hub'>Hangout Hub</NavLink>
+                        <NavLink to='/register'>Register</NavLink>
+                        <NavLink to='/log-in'>Log In</NavLink>
+                        <NavLink to='/'>Log Out</NavLink>
+                        <NavLink to='/plan-event'>Plan Event</NavLink>
+                    </menu>
+                </nav>
 
-            <Footer />
+                <main>
+                    <Routes>
+                        <Route path='/' element={<Home />} exact />
+                        <Route path='/hangout-hub' element={<HangoutHub />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/log-in' element={<Login />} />
+                        <Route path='/plan-event' element={<PlanEvent />} />
+                        <Route path='*' element={<Navigate to='/' replace />} />
+                    </Routes>
+                </main>
+            </div>
+        </BrowserRouter>
+        <Footer />
         </>
     )
 }
