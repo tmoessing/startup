@@ -1,10 +1,3 @@
-let eventID = 0;
-let eventTitle
-let eventDate
-let eventTime
-let eventLocation
-let eventDescription
-
 function displayQuote(data) {
     fetch('https://api.quotable.io/random')
       .then((response) => response.json())
