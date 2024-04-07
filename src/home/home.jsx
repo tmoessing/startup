@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 function Home() {
+    const [quote, setQuote] = useState({ content: '', author: '' });
+
+    useEffect(() => {
+        const fetchQuote = async () => {
+            try {
+                const response = await fetch('https://api.quotable.io/random');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch quote');
+                }
+                const data = await response.json();
+                setQuote({ content: data.content, author: data.author });
+            } catch (error) {
+                console.error('Error fetching quote:', error);
+                setQuote({ content: "TOUGH", author: "Tyler" });
+            }
+        };
+
+        fetchQuote();
+    }, []);
+
     return (
         <>
             <section className="homepage">
@@ -18,11 +38,12 @@ function Home() {
                 </div>
 
                 <div className="picture">
-                    <img alt="Friends Looking off in the distance" src=" /media_files/friends.jpg" width="500"/>
+                    <img alt="Friends Looking off in the distance" src="/media_files/friends.jpg" width="500" />
                 </div>
                 <p>_____________________________________</p>
                 <div id="quote">
-
+                    <p className="author"> {quote.content} </p>
+                    <p className="quote"> {quote.author} </p>
                 </div>
             </section>
         </>
