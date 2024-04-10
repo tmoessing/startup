@@ -1,6 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function Home() {
+    const navigate = useNavigate();
+
+    function logIn() {
+        navigate('./log-in');
+    }
+
+    function register() {
+        navigate('./register')
+    }
+
     const [quote, setQuote] = useState({ content: '', author: '' });
 
     useEffect(() => {
@@ -30,10 +42,10 @@ function Home() {
 
                 <div id="homepage-buttons">
                     <div className="box-button">
-                        <a href="html_files/log_in.html">Log In</a>
+                        <a onClick={logIn}>Log In</a>
                     </div>
                     <div className="box-button">
-                        <a href="html_files/register.html">Register</a>
+                        <a onClick={register}>Register</a>
                     </div>
                 </div>
 
