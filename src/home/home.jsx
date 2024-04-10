@@ -26,7 +26,7 @@ function Home() {
                 setQuote({ content: data.content, author: data.author });
             } catch (error) {
                 console.error('Error fetching quote:', error);
-                setQuote({ content: "TOUGH", author: "Tyler" });
+                setQuote({ content: "", author: "" });
             }
         };
 
