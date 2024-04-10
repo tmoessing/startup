@@ -19,6 +19,8 @@ import Register from './register/register.jsx'
 import Login from './login/login.jsx'
 import PlanEvent from './plan_event/plan_event.jsx'
 
+import logOut from './log_out.js';
+
 // CSS Styling
 import './main.css'
 import './index.css'
@@ -35,7 +37,7 @@ function App() {
                             <NavLink to='/hangout-hub'>Hangout Hub</NavLink>
                             <NavLink to='/register'>Register</NavLink>
                             <NavLink to='/log-in'>Log In</NavLink>
-                            <NavLink to='/'>Log Out</NavLink>
+                            <NavLink to='/' onClick={logOut}>Log Out</NavLink>
                             <NavLink to='/plan-event'>Plan Event</NavLink>
                         </menu>
                     </nav>
