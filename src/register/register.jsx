@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import register from './register.js'
 import './register.css';
 
 function Register() {
     const navigate = useNavigate();
 
-    function register() {
-        navigate('')
+    function jsx_register() {
+        register(navigate);
     }
 
     return (
@@ -30,7 +31,7 @@ function Register() {
                         <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" placeholder="Password" required/>
                             <label htmlFor="confirmPassword">Confirm Password</label>
                     </div>
-                    <button className="btn btn-primary w-100 py-2" onclick={ register }>Register</button>
+                    <button className="btn btn-primary w-100 py-2" onClick={ jsx_register }>Register</button>
                 </div>
             </div>
         </>
