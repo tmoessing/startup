@@ -6,11 +6,11 @@ function Home() {
     const navigate = useNavigate();
 
     function logIn() {
-        navigate('./log-in');
+        navigate('/log-in');
     }
 
     function register() {
-        navigate('./register')
+        navigate('d/register')
     }
 
     const [quote, setQuote] = useState({ content: '', author: '' });
