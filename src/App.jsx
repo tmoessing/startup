@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 
 
+
 // Components
 import Header from './header/header.jsx'
 import Footer from './footer/footer.jsx'
@@ -19,7 +20,9 @@ import Register from './register/register.jsx'
 import Login from './login/login.jsx'
 import PlanEvent from './plan_event/plan_event.jsx'
 
+import {configureWebSocket } from './socket.js';
 import logOut from './log_out.js';
+configureWebSocket();
 
 // CSS Styling
 import './main.css'

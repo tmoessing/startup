@@ -1,0 +1,145 @@
+const EventCreatedEvent = "eventCreate";
+
+function getPlayerName() {
+    return localStorage.getItem('userName') ?? 'Mystery player';
+}
+
+export function newEvent(formatted_currentDate) {
+    let event_activity = document.getElementById("activity").value;
+    let event_date = document.getElementById("date").value;
+    let event_time = document.getElementById("time").value;
+    let event_location = document.getElementById("location").value;
+
+    if (!event_activity || !event_date || !event_time || !event_location) {
+        alert("Please fill out all required fields.");
+        return;
+    }
+
+    if (document.getElementById("date").value === formatted_currentDate) {
+        let currentTime = new Date();
+        let currentHour = currentTime.getHours();
+        let currentMinute = currentTime.getMinutes();
+
+        let [eventHour, eventMinute] = event_time.split(":").map(Number);
+
+        if (currentHour < eventHour) {
+        } else if (currentHour > eventHour) {
+            // event has already occurred this hour
+            alert("Please don't schedule a time that has already happened");
+            return;
+        } else {
+            // currentHour is equal to eventHour, check minute
+            if (currentMinute < eventMinute) {
+            } else if (currentMinute > eventMinute) {
+                // event has already occurred this minute
+                alert("Please don't schedule a time that has already happened");
+                return;
+            } else {
+                alert("Please don't schedule a time that has already happened");
+                return;
+            }
+        }
+    }
+
+    let EventObject = createEventObject(event_activity, event_date, event_time, event_location);
+
+
+
+    serverCreateEvent(EventObject)
+
+}
+
+function createEventObject(event_activity, event_date, event_time, event_location) {
+    // return EventObject = {
+    //     event_details:{
+    //         event_activity: event_activity,
+    //         event_date: event_date,
+    //         event_time: event_time,
+    //         event_location: event_location},
+    //     event_meta_data:{
+    //         event_author: getEventAuthor(),
+    //         event_creation_data: new Date().toISOString().split('T')[0]
+    //     }
+    // };
+
+    let EventObject = {
+        Activity: event_activity,
+        Date: event_date,
+        Time: event_time,
+        Location: event_location
+    }
+
+    return EventObject;
+};
+
+
+
+function storeEvent() {
+    let currentUserObject = JSON.parse(localStorage.getItem("currentUser"));
+    currentUserObject[user_statisticsz][total_events_created] += 1;
+    usersEvents = currentUserObject[user_statisticsz][user_current_events]
+}
+
+async function serverCreateEvent(EventObject) {
+    const response = await fetch('/api/create-event', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(EventObject),
+    });
+
+    if (response.ok) {
+        broadcastEvent(getPlayerName(), EventCreatedEvent, EventObject.Activity)
+        window.location.href = "hangout_hub.html";
+    } else {
+        if (response.status == 401) {
+            alert(`⚠ Unauthorized to make an event. Please Log in or Create an Account`)
+            window.location.href = "log_in.html";
+        }
+    }
+}
+
+export function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
+        //   displayMsg('system', 'game', 'connected');
+        // console.log("CONNECTED TO WEBSOCKET")
+    };
+    // socket.onclose = (event) => {
+    //   displayMsg('system', 'game', 'disconnected');
+    // };
+    socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        console.log(msg)
+        if (msg.type === EventCreatedEvent) {
+            displayMsg('user', msg.user, `${msg.activity}`);
+        }
+        //   else if (msg.type === GameStartEvent) {
+        //     // this.displayMsg(getPlayerName(), msg.user, `started a new game`);
+        //   }
+    };
+}
+
+function displayMsg(cls, user, event) {
+    const notificationContainer = document.querySelector('.notification-section');
+
+    const newNotification = document.createElement('aside');
+    newNotification.className = '.notification';
+    newNotification.innerHTML = `<p><span class="user">${user}</span> planned ${event}</p>`;
+    notificationContainer.appendChild(newNotification);
+
+    if (notificationContainer.children.length > 4) {
+        notificationContainer.removeChild(notificationContainer.children[0])
+    }
+
+    notificationContainer.style.display = 'block';
+};
+
+function broadcastEvent(user, type, activity) {
+    const event = {
+        user: user,
+        type: type,
+        activity: activity,
+    };
+    socket.send(JSON.stringify(event));
+};
