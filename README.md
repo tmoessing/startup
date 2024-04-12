@@ -120,3 +120,11 @@ For this deliverable I built out the structure of my application using HTML.
 - WebSocket data displayed - If a user is on the plan event page and a diffrent users are planning events and clicking create they will get a live time notification!
 
 ### React Deliverable
+
+- **Bundled and transpiled** - done!
+
+- **Components** - Plan Event, Login, Register, Hangout Hub, and Home are all components.
+
+- **Router** - In App.jsx Router is used for the Navigation Bar
+
+- **Hooks** - Plan Event and Hangout Hub use useEffect
